@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoamMVC", "FoamMVC\FoamMVC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoamMVC.Tests", "FoamMVC.Tests\FoamMVC.Tests.csproj", "{C0DC7CFB-7009-4D9C-AC50-244A208A1218}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloverClient", "CloverClient\CloverClient.csproj", "{F24E8619-7282-4396-9883-98D29B0DE1DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C0DC7CFB-7009-4D9C-AC50-244A208A1218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0DC7CFB-7009-4D9C-AC50-244A208A1218}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0DC7CFB-7009-4D9C-AC50-244A208A1218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F24E8619-7282-4396-9883-98D29B0DE1DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24E8619-7282-4396-9883-98D29B0DE1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24E8619-7282-4396-9883-98D29B0DE1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24E8619-7282-4396-9883-98D29B0DE1DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -172,6 +172,7 @@
     <Compile Include="BLL\CRUD\ItemOperations\ItemCRUDBLL.cs" />
     <Compile Include="BLL\CRUD\LocationOperations\LocationCRUDBLL.cs" />
     <Compile Include="BLL\CRUD\PalletGroupOperations\PalletGroupCRUDBLL.cs" />
+    <Compile Include="BLL\CRUD\StagedItemsOperations\StagedItemCRUDBLL.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -196,10 +197,13 @@
     <Compile Include="DAL\CRUD\ReviewOperations\ReviewCRUD.cs" />
     <Compile Include="DAL\CRUD\ReviewScoreForDescriptorOperations\IReviewScoreForDescriptorCRUD.cs" />
     <Compile Include="DAL\CRUD\ReviewScoreForDescriptorOperations\ReviewScoreForDescriptorCRUD.cs" />
+    <Compile Include="DAL\CRUD\StagedItemOperations\IStagedItemCRUD.cs" />
+    <Compile Include="DAL\CRUD\StagedItemOperations\StagedItemCRUD.cs" />
     <Compile Include="DAL\CRUD\TagOperations\ITagCRUD.cs" />
     <Compile Include="DAL\CRUD\TagOperations\TagCRUD.cs" />
     <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\IUserScoreForDescriptorCRUD.cs" />
     <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\UserScoreForDescriptorCRUD.cs" />
+    <Compile Include="DTOs\StagedItemDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,6 +214,10 @@
     <Compile Include="Migrations\201510112357175_changedUserToApplicationUser.cs" />
     <Compile Include="Migrations\201510112357175_changedUserToApplicationUser.Designer.cs">
       <DependentUpon>201510112357175_changedUserToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510212030431_StagedItemsAdded.cs" />
+    <Compile Include="Migrations\201510212030431_StagedItemsAdded.Designer.cs">
+      <DependentUpon>201510212030431_StagedItemsAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -227,6 +235,7 @@
     <Compile Include="Models\PalletGroup.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\ReviewScoreForDescriptor.cs" />
+    <Compile Include="Models\StagedItem.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\UserScoreForDescriptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -323,6 +332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510112357175_changedUserToApplicationUser.resx">
       <DependentUpon>201510112357175_changedUserToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510212030431_StagedItemsAdded.resx">
+      <DependentUpon>201510212030431_StagedItemsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

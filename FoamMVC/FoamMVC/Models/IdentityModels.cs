@@ -37,6 +37,7 @@ namespace FoamMVC.Models
         public DbSet<ReviewScoreForDescriptor> ReviewScoreForDescriptors { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<UserScoreForDescriptor> UserScoreForDescriptors { get; set; }
+        public DbSet<StagedItem> StagedItems { get; set; }
 
         public static ApplicationDbContext Create()
         {
