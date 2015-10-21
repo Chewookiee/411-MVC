@@ -24,36 +24,38 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
             {
                 throw new Exception("The pallet group sent in for creation is null");
             }
-            palletGroupToCreate.IsDeleted = false;
-            palletGroupToCreate.DateAdded = DateTime.Now;
-            palletGroupToCreate.DateDeleted = null;
-            palletGroupToCreate.DateUpdated = null;
+
+            base.UpdateDateAdded(palletGroupToCreate);
+            base.UpdateIsDeletedToFalse(palletGroupToCreate);
 
             db.PalletGroups.Add(palletGroupToCreate);
-            int idOfPalletGroup = db.SaveChanges();
+            db.SaveChanges();
+            int idOfPalletGroup = palletGroupToCreate.ID;
 
             return idOfPalletGroup;
         }
 
         public IList<PalletGroup> Get()
         {
-            IList<PalletGroup> palletGroupsToReturn;
-            palletGroupsToReturn = db.PalletGroups.ToList();
+            IList<PalletGroup> palletGroupsToReturn = db.PalletGroups.ToList();
+
             if (palletGroupsToReturn == null)
             {
                 throw new Exception("There are no Pallet groups that exist in the database.");
             }
+
             return palletGroupsToReturn;
         }
 
         public PalletGroup Get(int id)
         {
-            PalletGroup palletGroupToReturn;
-            palletGroupToReturn = db.PalletGroups.SingleOrDefault(c => c.ID == id);
+            PalletGroup palletGroupToReturn = db.PalletGroups.SingleOrDefault(c => c.ID == id);
+
             if (palletGroupToReturn == null)
             {
                 throw new Exception("No Pallet Group with the ID " + id + " exists.");
             }
+
             return palletGroupToReturn;
         }
 
@@ -64,27 +66,30 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 
         public PalletGroup Get(string name)
         {
-            PalletGroup palletGroupToGet;
-            palletGroupToGet = db.PalletGroups.SingleOrDefault(c => c.Name.Equals(name));
+            PalletGroup palletGroupToGet = db.PalletGroups.SingleOrDefault(c => c.Name.Equals(name));
+
             if (palletGroupToGet == null)
             {
                 throw new Exception("There is no Pallet Group that exists with the name " + name);
             }
+
             return palletGroupToGet;
         }
 
         public int Update(PalletGroup updatedPalletGroup)
         {
-            PalletGroup palletGroupToUpdate;
-            palletGroupToUpdate = db.PalletGroups.SingleOrDefault(c => c.ID == updatedPalletGroup.ID);
+            PalletGroup palletGroupToUpdate = db.PalletGroups.SingleOrDefault(c => c.ID == updatedPalletGroup.ID);
 
             if (palletGroupToUpdate == null)
             {
                 throw new Exception("There is no Pallet Group with the ID " + updatedPalletGroup.ID);
             }
 
+            base.UpdateDateUpdated(updatedPalletGroup);
+
             db.PalletGroups.AddOrUpdate(c => c.ID, updatedPalletGroup);
-            int idOfPalletGroup = db.SaveChanges();
+            db.SaveChanges();
+            int idOfPalletGroup = updatedPalletGroup.ID;
 
             return idOfPalletGroup;
         }
@@ -119,13 +124,15 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 
         public void Delete(int id)
         {
-            PalletGroup palletGroupToDelete;
-            palletGroupToDelete = db.PalletGroups.SingleOrDefault(c => c.ID == id);
+            PalletGroup palletGroupToDelete = db.PalletGroups.SingleOrDefault(c => c.ID == id);
             if (palletGroupToDelete == null)
             {
                 throw new Exception("No Pallete Group exists with the ID " + id);
             }
-            palletGroupToDelete.IsDeleted = true;
+
+            base.UpdateDateDeleted(palletGroupToDelete);
+            base.UpdateIsDeletedToTrue(palletGroupToDelete);
+            
             db.SaveChanges();
         }
 
@@ -160,12 +167,12 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 
         public void Destroy(int id)
         {
-            PalletGroup palletGroupToDestroy;
-            palletGroupToDestroy = db.PalletGroups.SingleOrDefault(c => c.ID == id);
+            PalletGroup palletGroupToDestroy = db.PalletGroups.SingleOrDefault(c => c.ID == id);
             if (palletGroupToDestroy == null)
             {
                 throw new Exception("No Pallet Group exists with the ID " + id);
             }
+
             db.PalletGroups.Remove(palletGroupToDestroy);
             db.SaveChanges();
         }

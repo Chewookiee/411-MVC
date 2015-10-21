@@ -23,8 +23,13 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
             {
                 throw new Exception("The Review Score For Descriptor sent in for creation is null.");
             }
+
+            base.UpdateDateAdded(reviewScoreForDescriptorToCreate);
+            base.UpdateIsDeletedToFalse(reviewScoreForDescriptorToCreate);
+
             db.ReviewScoreForDescriptors.Add(reviewScoreForDescriptorToCreate);
-            int idOfreviewScoreForDescriptor = db.SaveChanges();
+            db.SaveChanges();
+            int idOfreviewScoreForDescriptor = reviewScoreForDescriptorToCreate.ID;
 
             return idOfreviewScoreForDescriptor;
         }
@@ -48,15 +53,16 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 
         public void Delete(int id)
         {
-            ReviewScoreForDescriptor reviewScoreForDescriptorToDelete;
-            reviewScoreForDescriptorToDelete = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == id);
+            ReviewScoreForDescriptor reviewScoreForDescriptorToDelete = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (reviewScoreForDescriptorToDelete == null)
             {
                 throw new Exception("No Review Score For Descriptor exists with the id " + id);
             }
 
-            reviewScoreForDescriptorToDelete.IsDeleted = true;
+            base.UpdateDateDeleted(reviewScoreForDescriptorToDelete);
+            base.UpdateIsDeletedToTrue(reviewScoreForDescriptorToDelete);
+            
             db.SaveChanges();
         }
 
@@ -74,8 +80,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 
         public void Destroy(int id)
         {
-            ReviewScoreForDescriptor reviewScoreForDescriptorToDestroy;
-            reviewScoreForDescriptorToDestroy = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == id);
+            ReviewScoreForDescriptor reviewScoreForDescriptorToDestroy = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (reviewScoreForDescriptorToDestroy == null)
             {
@@ -117,8 +122,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 
         public IList<ReviewScoreForDescriptor> Get()
         {
-            IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToReturn;
-            reviewScoreForDescriptorsToReturn = db.ReviewScoreForDescriptors.ToList();
+            IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToReturn = db.ReviewScoreForDescriptors.ToList();
 
             if (reviewScoreForDescriptorsToReturn == null)
             {
@@ -130,8 +134,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 
         public ReviewScoreForDescriptor Get(int id)
         {
-            ReviewScoreForDescriptor reviewScoreForDescriptorToReturn;
-            reviewScoreForDescriptorToReturn = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == id);
+            ReviewScoreForDescriptor reviewScoreForDescriptorToReturn = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (reviewScoreForDescriptorToReturn == null)
             {
@@ -143,13 +146,14 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 
         public int Update(ReviewScoreForDescriptor updatedReviewScoreForDescriptor)
         {
-            ReviewScoreForDescriptor reviewScoreForDescriptorToUpdate;
-            reviewScoreForDescriptorToUpdate = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == updatedReviewScoreForDescriptor.ID);
+            ReviewScoreForDescriptor reviewScoreForDescriptorToUpdate = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == updatedReviewScoreForDescriptor.ID);
 
             if (updatedReviewScoreForDescriptor == null)
             {
-                throw new Exception("No Like exists with the id " + updatedReviewScoreForDescriptor.ID);
+                throw new Exception("No Review Score For Descriptor exists with the id " + updatedReviewScoreForDescriptor.ID);
             }
+
+            base.UpdateDateUpdated(updatedReviewScoreForDescriptor);
 
             db.ReviewScoreForDescriptors.AddOrUpdate(l => l.ID, updatedReviewScoreForDescriptor);
             int idOfReviewScoreForDescriptor = db.SaveChanges();

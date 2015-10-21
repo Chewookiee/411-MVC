@@ -27,5 +27,16 @@ namespace FoamMVC.BLL.CRUD.LocationOperations
                 Value = S.ID.ToString()
             }).ToList();
         }
+
+        #region Create/Update
+        public int CreateLocation(LocationViewModel viewModel)
+        {
+            return _locationCrud.Create(new Location
+            {
+                PrimaryLocation = viewModel.PrimaryLocation,
+                SecondaryLocation = viewModel.SecondaryLocation
+            });
+        }
+        #endregion
     }
 }

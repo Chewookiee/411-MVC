@@ -24,23 +24,29 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
             {
                 throw new Exception("The Item sent in for creation is null.");
             }
+
+            base.UpdateDateAdded(itemToCreate);
+            base.UpdateIsDeletedToFalse(itemToCreate);
+
             db.Items.Add(itemToCreate);
-            int idOfItem = db.SaveChanges();
+            db.SaveChanges();
+            int idOfItem = itemToCreate.ID;
 
             return idOfItem;
         }
 
         public void Delete(int id)
         {
-            Item itemToDelete;
-            itemToDelete = db.Items.SingleOrDefault(i => i.ID == id);
+            Item itemToDelete = db.Items.SingleOrDefault(i => i.ID == id);
 
             if (itemToDelete == null)
             {
                 throw new Exception("No Item exists with the id " + id);
             }
 
-            itemToDelete.IsDeleted = true;
+            base.UpdateIsDeletedToTrue(itemToDelete);
+            base.UpdateDateDeleted(itemToDelete);
+
             db.SaveChanges();
         }
 
@@ -87,8 +93,7 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
 
         public void Destroy(int id)
         {
-            Item itemToDestroy;
-            itemToDestroy = db.Items.SingleOrDefault(i => i.ID == id);
+            Item itemToDestroy = db.Items.SingleOrDefault(i => i.ID == id);
 
             if (itemToDestroy == null)
             {
@@ -118,8 +123,7 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
 
         public IList<Item> Get()
         {
-            IList<Item> itemsToReturn;
-            itemsToReturn = db.Items.ToList();
+            IList<Item> itemsToReturn = db.Items.ToList();
 
             if (itemsToReturn == null)
             {
@@ -131,8 +135,7 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
 
         public Item Get(int id)
         {
-            Item itemToReturn;
-            itemToReturn = db.Items.SingleOrDefault(i => i.ID == id);
+            Item itemToReturn = db.Items.SingleOrDefault(i => i.ID == id);
 
             if (itemToReturn == null)
             {
@@ -144,8 +147,7 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
 
         public Item Get(string upc)
         {
-            Item itemToReturn;
-            itemToReturn = db.Items.SingleOrDefault(i => i.UPC.Equals(upc));
+            Item itemToReturn = db.Items.SingleOrDefault(i => i.UPC.Equals(upc));
 
             if (itemToReturn == null)
             {
@@ -162,16 +164,18 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
 
         public int Update(Item updatedItem)
         {
-            Item itemToUpdate;
-            itemToUpdate = db.Items.SingleOrDefault(i => i.ID == updatedItem.ID);
+            Item itemToUpdate = db.Items.SingleOrDefault(i => i.ID == updatedItem.ID);
 
             if (itemToUpdate == null)
             {
                 throw new Exception("No Item exists with the id " + updatedItem.ID);
             }
 
+            base.UpdateDateUpdated(updatedItem);
+
             db.Items.AddOrUpdate(i => i.ID, updatedItem);
-            int idOfItem = db.SaveChanges();
+            db.SaveChanges();
+            int idOfItem = itemToUpdate.ID;
 
             return idOfItem;
         }

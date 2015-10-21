@@ -24,8 +24,13 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
             {
                 throw new Exception("The Like sent in for creation is null.");
             }
+
+            base.UpdateDateAdded(likeToCreate);
+            base.UpdateIsDeletedToTrue(likeToCreate);
+
             db.Likes.Add(likeToCreate);
-            int idOfLike = db.SaveChanges();
+            db.SaveChanges();
+            int idOfLike = likeToCreate.ID;
 
             return idOfLike;
         }
@@ -49,22 +54,21 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public void Delete(int id)
         {
-            Like likeToDelete;
-            likeToDelete = db.Likes.SingleOrDefault(i => i.ID == id);
+            Like likeToDelete = db.Likes.SingleOrDefault(i => i.ID == id);
 
             if (likeToDelete == null)
             {
                 throw new Exception("No Like exists with the id " + id);
             }
 
-            likeToDelete.IsDeleted = true;
+            base.UpdateIsDeletedToTrue(likeToDelete);
+            base.UpdateDateDeleted(likeToDelete);
+
             db.SaveChanges(); 
         }
 
         public void Delete(IList<Like> likesToDelete)
         {
-            bool allSucceeded = true;
-
             if (likesToDelete == null)
             {
                 throw new Exception("There were no Likes in the list to delete");
@@ -77,8 +81,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public void Destroy(int id)
         {
-            Like likeToDestroy;
-            likeToDestroy = db.Likes.SingleOrDefault(i => i.ID == id);
+            Like likeToDestroy = db.Likes.SingleOrDefault(i => i.ID == id);
 
             if (likeToDestroy == null)
             {
@@ -120,8 +123,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public IList<Like> Get()
         {
-            IList<Like> likesToReturn;
-            likesToReturn = db.Likes.ToList();
+            IList<Like> likesToReturn = db.Likes.ToList();
 
             if (likesToReturn == null)
             {
@@ -133,8 +135,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public Like Get(int id)
         {
-            Like likeToReturn;
-            likeToReturn = db.Likes.SingleOrDefault(i => i.ID == id);
+            Like likeToReturn = db.Likes.SingleOrDefault(i => i.ID == id);
 
             if (likeToReturn == null)
             {
@@ -146,16 +147,18 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public int Update(Like updatedLike)
         {
-            Like likeToUpdate;
-            likeToUpdate = db.Likes.SingleOrDefault(i => i.ID == updatedLike.ID);
+            Like likeToUpdate = db.Likes.SingleOrDefault(i => i.ID == updatedLike.ID);
 
             if (likeToUpdate == null)
             {
                 throw new Exception("No Like exists with the id " + updatedLike.ID);
             }
 
+            base.UpdateDateUpdated(updatedLike);
+
             db.Likes.AddOrUpdate(l => l.ID, updatedLike);
-            int idOfLike = db.SaveChanges();
+            db.SaveChanges();
+            int idOfLike = updatedLike.ID;
 
             return idOfLike;
         }

@@ -24,8 +24,13 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
             {
                 throw new Exception("The Review sent in for creation is null.");
             }
+
+            base.UpdateDateAdded(reviewToCreate);
+            base.UpdateIsDeletedToFalse(reviewToCreate);
+
             db.Reviews.Add(reviewToCreate);
-            int idOfReviewDescriptor = db.SaveChanges();
+            db.SaveChanges();
+            int idOfReviewDescriptor = reviewToCreate.ID;
 
             return idOfReviewDescriptor;
         }
@@ -37,15 +42,16 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         private void Delete(int id)
         {
-            Review reviewToDelete;
-            reviewToDelete = db.Reviews.SingleOrDefault(i => i.ID == id);
+            Review reviewToDelete = db.Reviews.SingleOrDefault(i => i.ID == id);
 
             if (reviewToDelete == null)
             {
                 throw new Exception("No Review exists with the id " + id);
             }
 
-            reviewToDelete.IsDeleted = true;
+            base.UpdateDateDeleted(reviewToDelete);
+            base.UpdateIsDeletedToTrue(reviewToDelete);
+            
             db.SaveChanges();
         }
 
@@ -63,8 +69,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         private void Destroy(int id)
         {
-            Review reviewToDestroy;
-            reviewToDestroy = db.Reviews.SingleOrDefault(i => i.ID == id);
+            Review reviewToDestroy = db.Reviews.SingleOrDefault(i => i.ID == id);
 
             if (reviewToDestroy == null)
             {
@@ -94,8 +99,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         public IList<Review> Get()
         {
-            IList<Review> reviewsToReturn;
-            reviewsToReturn = db.Reviews.ToList();
+            IList<Review> reviewsToReturn = db.Reviews.ToList();
 
             if (reviewsToReturn == null)
             {
@@ -107,8 +111,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         public Review Get(int id)
         {
-            Review reviewToReturn;
-            reviewToReturn = db.Reviews.SingleOrDefault(i => i.ID == id);
+            Review reviewToReturn = db.Reviews.SingleOrDefault(i => i.ID == id);
 
             if (reviewToReturn == null)
             {
@@ -120,16 +123,18 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         public int Update(Review review)
         {
-            Review reviewToUpdate;
-            reviewToUpdate = db.Reviews.SingleOrDefault(i => i.ID == review.ID);
+            Review reviewToUpdate = db.Reviews.SingleOrDefault(i => i.ID == review.ID);
 
             if (reviewToUpdate == null)
             {
                 throw new Exception("No Review exists with the id " + review.ID);
             }
 
+            base.UpdateDateUpdated(reviewToUpdate);
+
             db.Reviews.AddOrUpdate(r => r.ID, reviewToUpdate);
-            int idOfReview = db.SaveChanges();
+            db.SaveChanges();
+            int idOfReview = reviewToUpdate.ID;
 
             return idOfReview;
         }

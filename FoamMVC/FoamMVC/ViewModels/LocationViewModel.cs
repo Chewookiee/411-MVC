@@ -9,11 +9,8 @@ namespace FoamMVC.ViewModels
 {
     public class LocationViewModel
     {
-        public int LocationID { get; set; }
-        public string Display { get; set; }
+        public int ID { get; set; }
         public string PrimaryLocation { get; set; }
         public string SecondaryLocation { get; set; }
-
-        public IList<Company> Companies { get; set; }
     }
 }

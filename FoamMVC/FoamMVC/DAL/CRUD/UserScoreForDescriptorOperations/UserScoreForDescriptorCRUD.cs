@@ -23,8 +23,13 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
             {
                 throw new Exception("The User Score For Descriptor To Create sent in for creation is null.");
             }
+
+            base.UpdateDateAdded(userScoreForDescriptorToCreate);
+            base.UpdateIsDeletedToFalse(userScoreForDescriptorToCreate);
+
             db.UserScoreForDescriptors.Add(userScoreForDescriptorToCreate);
-            int idOfUserScoreForDescriptor = db.SaveChanges();
+            db.SaveChanges();
+            int idOfUserScoreForDescriptor = userScoreForDescriptorToCreate.ID;
 
             return idOfUserScoreForDescriptor;
         }
@@ -48,15 +53,16 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public void Delete(int id)
         {
-            UserScoreForDescriptor userScoreForDescriptorToDelete;
-            userScoreForDescriptorToDelete = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == id);
+            UserScoreForDescriptor userScoreForDescriptorToDelete = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (userScoreForDescriptorToDelete == null)
             {
                 throw new Exception("No User Score For Descriptor exists with the id " + id);
             }
 
-            userScoreForDescriptorToDelete.IsDeleted = true;
+            base.UpdateDateDeleted(userScoreForDescriptorToDelete);
+            base.UpdateIsDeletedToTrue(userScoreForDescriptorToDelete);
+            
             db.SaveChanges();
         }
 
@@ -74,8 +80,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public void Destroy(int id)
         {
-            UserScoreForDescriptor userScoreForDescriptorToDestroy;
-            userScoreForDescriptorToDestroy = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == id);
+            UserScoreForDescriptor userScoreForDescriptorToDestroy = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (userScoreForDescriptorToDestroy == null)
             {
@@ -117,8 +122,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public IList<UserScoreForDescriptor> Get()
         {
-            IList<UserScoreForDescriptor> userScoreForDescriptorsToReturn;
-            userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.ToList();
+            IList<UserScoreForDescriptor> userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.ToList();
 
             if (userScoreForDescriptorsToReturn == null)
             {
@@ -130,8 +134,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public UserScoreForDescriptor Get(int id)
         {
-            UserScoreForDescriptor userScoreForDescriptorToReturn;
-            userScoreForDescriptorToReturn = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == id);
+            UserScoreForDescriptor userScoreForDescriptorToReturn = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (userScoreForDescriptorToReturn == null)
             {
@@ -143,16 +146,18 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public int Update(UserScoreForDescriptor updatedUserScoreForDescriptor)
         {
-            UserScoreForDescriptor userScoreForDescriptorToUpdate;
-            userScoreForDescriptorToUpdate = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == updatedUserScoreForDescriptor.ID);
+            UserScoreForDescriptor userScoreForDescriptorToUpdate = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == updatedUserScoreForDescriptor.ID);
 
             if (userScoreForDescriptorToUpdate == null)
             {
                 throw new Exception("No Like exists with the id " + updatedUserScoreForDescriptor.ID);
             }
 
+            base.UpdateDateUpdated(userScoreForDescriptorToUpdate);
+
             db.UserScoreForDescriptors.AddOrUpdate(u => u.ID, updatedUserScoreForDescriptor);
-            int idOfUserScoreForDescriptor = db.SaveChanges();
+            db.SaveChanges();
+            int idOfUserScoreForDescriptor = userScoreForDescriptorToUpdate.ID;
 
             return idOfUserScoreForDescriptor;
         }

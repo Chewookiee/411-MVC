@@ -26,10 +26,8 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
                 throw new Exception("The Category sent in for creation is null.");
             }
 
-            categoryToCreate.IsDeleted = false;
-            categoryToCreate.DateAdded = DateTime.Now;
-            categoryToCreate.Items = new List<Item>();
-            categoryToCreate.PalletDescriptors = new List<PalletDescriptor>();
+            base.UpdateIsDeletedToFalse(categoryToCreate);
+            base.UpdateDateAdded(categoryToCreate);
 
             db.Categories.Add(categoryToCreate);
             db.SaveChanges();
@@ -40,8 +38,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
 
         public IList<Category> Get()
         {
-            IList<Category> categoriesToReturn;
-            categoriesToReturn = db.Categories.ToList();
+            IList<Category> categoriesToReturn = db.Categories.ToList();
 
             if (categoriesToReturn == null)
             {
@@ -52,8 +49,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
         }
         public Category Get(int id)
         {
-            Category categoryToReturn;
-            categoryToReturn = db.Categories.SingleOrDefault(c => c.ID == id);
+            Category categoryToReturn = db.Categories.SingleOrDefault(c => c.ID == id);
 
             if (categoryToReturn == null)
             {
@@ -81,13 +77,14 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
 
         public int Update(Category updatedCategory)
         {
-            Category categoryToUpdate;
-            categoryToUpdate = db.Categories.SingleOrDefault(c => c.ID == updatedCategory.ID);
+            Category categoryToUpdate = db.Categories.SingleOrDefault(c => c.ID == updatedCategory.ID);
 
             if (categoryToUpdate == null)
             {
                 throw new Exception("No Category exists with the id " + updatedCategory.ID);
             }
+           
+            base.UpdateDateUpdated(updatedCategory);
 
             db.Categories.AddOrUpdate(c => c.ID, updatedCategory);
             db.SaveChanges();
@@ -124,15 +121,14 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
         }
         public void Delete(int id)
         {
-            Category categoryToDelete;
-            categoryToDelete = db.Categories.SingleOrDefault(c => c.ID == id);
+            Category categoryToDelete = db.Categories.SingleOrDefault(c => c.ID == id);
 
             if (categoryToDelete == null)
             {
                 throw new Exception("No Category exists with the id " + id);
             }
-
-            categoryToDelete.IsDeleted = true;
+            
+            base.UpdateIsDeletedToTrue(categoryToDelete);
             db.SaveChanges();
         }
 
@@ -164,8 +160,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
         }
         public void Destroy(int id)
         {
-            Category categoryToDestroy;
-            categoryToDestroy = db.Categories.SingleOrDefault(c => c.ID == id);
+            Category categoryToDestroy = db.Categories.SingleOrDefault(c => c.ID == id);
 
             if (categoryToDestroy == null)
             {

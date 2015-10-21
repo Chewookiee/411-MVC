@@ -26,16 +26,19 @@ namespace FoamMVC.DAL.CRUD.TagOperations
                 throw new Exception("The Tag sent in for creation is null.");
             }
 
+            base.UpdateDateAdded(tagToCreate);
+            base.UpdateIsDeletedToFalse(tagToCreate);
+
             db.Tags.Add(tagToCreate);
-            int idOfTag = db.SaveChanges();
+            db.SaveChanges();
+            int idOfTag = tagToCreate.ID;
 
             return idOfTag;
         }
 
         public IList<Tag> Get()
         {
-            IList<Tag> tagsToReturn;
-            tagsToReturn = db.Tags.ToList();
+            IList<Tag> tagsToReturn = db.Tags.ToList();
 
             if (tagsToReturn == null)
             {
@@ -44,10 +47,10 @@ namespace FoamMVC.DAL.CRUD.TagOperations
 
             return tagsToReturn;
         }
+
         public Tag Get(int id)
         {
-            Tag tagToReturn;
-            tagToReturn = db.Tags.SingleOrDefault(c => c.ID == id);
+            Tag tagToReturn = db.Tags.SingleOrDefault(c => c.ID == id);
 
             if (tagToReturn == null)
             {
@@ -61,6 +64,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
         {
             return Get(tagToGet.Name);
         }
+
         public Tag Get(string name)
         {
             Tag tagToReturn;
@@ -76,16 +80,18 @@ namespace FoamMVC.DAL.CRUD.TagOperations
 
         public int Update(Tag updatedTag)
         {
-            Tag tagToUpdate;
-            tagToUpdate = db.Tags.SingleOrDefault(c => c.ID == updatedTag.ID);
+            Tag tagToUpdate = db.Tags.SingleOrDefault(c => c.ID == updatedTag.ID);
 
             if (tagToUpdate == null)
             {
                 throw new Exception("No Tag exists with the id " + updatedTag.ID);
             }
 
+            base.UpdateDateUpdated(updatedTag);
+
             db.Tags.AddOrUpdate(c => c.ID, updatedTag);
-            int idOfTag = db.SaveChanges();
+            db.SaveChanges();
+            int idOfTag = updatedTag.ID;
 
             return idOfTag;
         }
@@ -101,6 +107,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
                 Delete(tag);
             }
         }
+
         public void Delete(IList<int> tagsToDelete)
         {
             if (tagsToDelete == null)
@@ -112,21 +119,24 @@ namespace FoamMVC.DAL.CRUD.TagOperations
                 Delete(tagID);
             }
         }
+
         public void Delete(Tag tagToDelete)
         {
             Delete(tagToDelete.ID);
         }
+
         public void Delete(int id)
         {
-            Tag tagToDelete;
-            tagToDelete = db.Tags.SingleOrDefault(c => c.ID == id);
+            Tag tagToDelete = db.Tags.SingleOrDefault(c => c.ID == id);
 
             if (tagToDelete == null)
             {
                 throw new Exception("No Tag exists with the id " + id);
             }
 
-            tagToDelete.IsDeleted = true;
+            base.UpdateDateDeleted(tagToDelete);
+            base.UpdateIsDeletedToTrue(tagToDelete);
+            
             db.SaveChanges();
         }
 
@@ -141,6 +151,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
                 Destroy(tag);
             }
         }
+
         public void Destroy(IList<int> tagsToDestroy)
         {
             if (tagsToDestroy == null)
@@ -152,14 +163,15 @@ namespace FoamMVC.DAL.CRUD.TagOperations
                 Destroy(tagID);
             }
         }
+
         public void Destroy(Tag tagToDestroy)
         {
             Destroy(tagToDestroy.ID);
         }
+
         public void Destroy(int id)
         {
-            Tag tagToDestroy;
-            tagToDestroy = db.Tags.SingleOrDefault(c => c.ID == id);
+            Tag tagToDestroy = db.Tags.SingleOrDefault(c => c.ID == id);
 
             if (tagToDestroy == null)
             {

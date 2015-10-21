@@ -24,6 +24,10 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
             {
                 throw new Exception("The Company sent in for creation is null.");
             }
+            
+            base.UpdateDateAdded(companyToCreate);
+            base.UpdateIsDeletedToFalse(companyToCreate);
+
             db.Companies.Add(companyToCreate);
             db.SaveChanges();
             int idOfCompany = companyToCreate.ID;
@@ -33,15 +37,15 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public void Delete(int id)
         {
-            Company companyToDelete;
-            companyToDelete = db.Companies.SingleOrDefault(c => c.ID == id);
+            Company companyToDelete = db.Companies.SingleOrDefault(c => c.ID == id);
 
             if (companyToDelete == null)
             {
                 throw new Exception("No Company exists with the id " + id);
             }
 
-            companyToDelete.IsDeleted = true;
+            base.UpdateDateDeleted(companyToDelete);
+            base.UpdateIsDeletedToTrue(companyToDelete);
             db.SaveChanges();
         }
 
@@ -88,8 +92,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public void Destroy(int id)
         {
-            Company companyToDestroy;
-            companyToDestroy = db.Companies.SingleOrDefault(c => c.ID == id);
+            Company companyToDestroy = db.Companies.SingleOrDefault(c => c.ID == id);
 
             if (companyToDestroy == null)
             {
@@ -119,8 +122,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public IList<Company> Get()
         {
-            IList<Company> companiesToReturn;
-            companiesToReturn = db.Companies.ToList();
+            IList<Company> companiesToReturn = db.Companies.ToList();
 
             if (companiesToReturn == null)
             {
@@ -130,10 +132,11 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
             return companiesToReturn;
         }
 
+
+
         public Company Get(int id)
         {
-            Company companyToReturn;
-            companyToReturn = db.Companies.SingleOrDefault(c => c.ID == id);
+            Company companyToReturn = db.Companies.SingleOrDefault(c => c.ID == id);
 
             if (companyToReturn == null)
             {
@@ -145,8 +148,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public Company Get(string name)
         {
-            Company companyToReturn;
-            companyToReturn = db.Companies.SingleOrDefault(c => c.Name.Equals(name));
+            Company companyToReturn = db.Companies.SingleOrDefault(c => c.Name.Equals(name));
 
             if (companyToReturn == null)
             {
@@ -170,6 +172,8 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
             {
                 throw new Exception("No Company exists with the id " + updatedCompany.ID);
             }
+
+            base.UpdateDateUpdated(updatedCompany);
 
             db.Companies.AddOrUpdate(c => c.ID, updatedCompany);
             db.SaveChanges();

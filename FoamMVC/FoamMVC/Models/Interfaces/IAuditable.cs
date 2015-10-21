@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoamMVC.Models.Interfaces
 {
-    interface IAuditable
+    public interface IAuditable
     {
         bool IsDeleted { get; set; }
         DateTime DateAdded { get; set; }

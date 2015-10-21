@@ -24,8 +24,13 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
             {
                 throw new Exception("The Pallet Descriptor sent in for creation is null.");
             }
+
+            base.UpdateDateAdded(palletDescriptorToCreate);
+            base.UpdateIsDeletedToFalse(palletDescriptorToCreate);
+
             db.PalletDescriptors.Add(palletDescriptorToCreate);
-            int idOfPalletDescriptor = db.SaveChanges();
+            db.SaveChanges();
+            int idOfPalletDescriptor = palletDescriptorToCreate.ID;
 
             return idOfPalletDescriptor;
         }
@@ -42,15 +47,16 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 
         public void Delete(int id)
         {
-            PalletDescriptor palletDescriptorToDelete;
-            palletDescriptorToDelete = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
+            PalletDescriptor palletDescriptorToDelete = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (palletDescriptorToDelete == null)
             {
                 throw new Exception("No Pallet Descriptors exists with the id " + id);
             }
+            
+            base.UpdateDateDeleted(palletDescriptorToDelete);
+            base.UpdateIsDeletedToTrue(palletDescriptorToDelete);
 
-            palletDescriptorToDelete.IsDeleted = true;
             db.SaveChanges();
         }
 
@@ -68,8 +74,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 
         public void Destroy(int id)
         {
-            PalletDescriptor palletDescriptorToDestroy;
-            palletDescriptorToDestroy = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
+            PalletDescriptor palletDescriptorToDestroy = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (palletDescriptorToDestroy == null)
             {
@@ -111,8 +116,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 
         public IList<PalletDescriptor> Get()
         {
-            IList<PalletDescriptor> palletDescriptorsToReturn;
-            palletDescriptorsToReturn = db.PalletDescriptors.ToList();
+            IList<PalletDescriptor> palletDescriptorsToReturn = db.PalletDescriptors.ToList();
 
             if (palletDescriptorsToReturn == null)
             {
@@ -124,8 +128,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 
         public PalletDescriptor Get(int id)
         {
-            PalletDescriptor palletDescriptorToReturn;
-            palletDescriptorToReturn = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
+            PalletDescriptor palletDescriptorToReturn = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
 
             if (palletDescriptorToReturn == null)
             {
@@ -137,16 +140,18 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 
         public int Update(PalletDescriptor updatedPalletDescriptor)
         {
-            PalletDescriptor palletDescriptorToUpdate;
-            palletDescriptorToUpdate = db.PalletDescriptors.SingleOrDefault(i => i.ID == updatedPalletDescriptor.ID);
+            PalletDescriptor palletDescriptorToUpdate = db.PalletDescriptors.SingleOrDefault(i => i.ID == updatedPalletDescriptor.ID);
 
             if (palletDescriptorToUpdate == null)
             {
                 throw new Exception("No Location exists with the id " + updatedPalletDescriptor.ID);
             }
 
+            base.UpdateDateUpdated(updatedPalletDescriptor);
+
             db.PalletDescriptors.AddOrUpdate(p => p.ID, updatedPalletDescriptor);
-            int idOfLocation = db.SaveChanges();
+            db.SaveChanges();
+            int idOfLocation = updatedPalletDescriptor.ID;
 
             return idOfLocation;
         }
