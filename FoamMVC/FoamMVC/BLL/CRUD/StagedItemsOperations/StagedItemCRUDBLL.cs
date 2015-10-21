@@ -11,7 +11,6 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
 {
     public class StagedItemCRUDBLL
     {
-
         private StagedItemCRUD _stagedItemCrud;
         private ItemCRUD _itemCrud;
 
