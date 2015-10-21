@@ -1,0 +1,12 @@
+﻿@model IEnumerable<FoamMVC.ViewModels.ItemViewModel>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View</h2>
+
+@foreach (var item in @Model)
+{
+    <h3>@item.Name</h3>
+}

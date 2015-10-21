@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoamMVC", "FoamMVC\FoamMVC.csproj", "{3CF082E1-E8D4-4DBA-A983-3E73D6C318D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoamMVC.Tests", "FoamMVC.Tests\FoamMVC.Tests.csproj", "{C0DC7CFB-7009-4D9C-AC50-244A208A1218}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CF082E1-E8D4-4DBA-A983-3E73D6C318D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF082E1-E8D4-4DBA-A983-3E73D6C318D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF082E1-E8D4-4DBA-A983-3E73D6C318D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF082E1-E8D4-4DBA-A983-3E73D6C318D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0DC7CFB-7009-4D9C-AC50-244A208A1218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0DC7CFB-7009-4D9C-AC50-244A208A1218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0DC7CFB-7009-4D9C-AC50-244A208A1218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0DC7CFB-7009-4D9C-AC50-244A208A1218}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
