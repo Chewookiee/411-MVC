@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FoamMVC.DAL.CRUD.ItemOperations;
 
 namespace FoamMVC.Controllers
 {
@@ -12,9 +13,9 @@ namespace FoamMVC.Controllers
     {
         public ActionResult Index()
         {
+            IItemCRUD x = new ItemCRUD();
             ApplicationDbContext db = new ApplicationDbContext();
-            var user = db.Users.FirstOrDefault();
-            db.SaveChanges();
+            var item = x.Get();
             return View();
         }
 
