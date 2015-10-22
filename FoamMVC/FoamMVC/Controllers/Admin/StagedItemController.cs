@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using FoamMVC.BLL.CRUD.ItemOperations;
 using FoamMVC.BLL.CRUD.StagedItemsOperations;
 using FoamMVC.ViewModels;
@@ -18,7 +19,7 @@ namespace FoamMVC.Controllers.Admin
         // GET: StagedItem
         public ActionResult Index()
         {
-            return View(_stagedItemBll.Get());
+            return View(_stagedItemBll.GetViewModels());
         }
 
         [HttpGet]
@@ -28,9 +29,21 @@ namespace FoamMVC.Controllers.Admin
         }
 
         [HttpPost]
-        public ActionResult CompleteStaged(ItemViewModel viewModel)
+        public ActionResult CompleteStaged(ItemViewModelStringItemPrice viewModel)
         {
-            _itemBll.CreateItem(viewModel);
+            var newViewModel = new ItemViewModel
+            {
+                ItemID = viewModel.ItemID,
+                PalletGroupID = viewModel.PalletGroupID,
+                CompanyID = viewModel.CompanyID,
+                CategoryID = viewModel.CategoryID,
+                UPC = viewModel.UPC,
+                IsFeautured = viewModel.IsFeautured,
+                ItemPrice = Convert.ToDouble(viewModel.ItemPrice.Replace("$", String.Empty)),
+                ImagePath = viewModel.ImagePath,
+                Name = viewModel.Name
+            };
+            _itemBll.CreateItem(newViewModel);
             _stagedItemBll.DeleteStagedItem(viewModel.UPC);
 
             return RedirectToAction("Index");

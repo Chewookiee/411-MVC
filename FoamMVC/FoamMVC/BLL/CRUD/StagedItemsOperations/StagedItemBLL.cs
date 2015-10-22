@@ -6,6 +6,7 @@ using FoamMVC.BLL.CRUD.ItemOperations;
 using FoamMVC.DAL.CRUD.ItemOperations;
 using FoamMVC.DAL.CRUD.StagedItemOperations;
 using FoamMVC.DTOs;
+using FoamMVC.ExtensionMethods;
 using FoamMVC.Models;
 using FoamMVC.ViewModels;
 
@@ -24,7 +25,7 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
 
         public void DeleteStagedItem(string UPC)
         {
-            _stagedItemDal.Destroy(ConvertDTOToEntity(GetStagedItemByUPC(UPC)));
+            _stagedItemDal.Destroy(ConvertDTOToEntity(GetStagedItemDTOByUPC(UPC)));
         } 
 
         public List<StagedItemDTO> Get()
@@ -34,6 +35,18 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
                 Name = x.Name,
                 UPC = x.UPC,
                 ItemPrice = x.ItemPrice,
+                StockCount = x.StockCount
+            }).ToList();
+        }
+
+        public List<StagedItemsViewModel> GetViewModels()
+        {
+            return _stagedItemDal.Get().Select(x => new StagedItemsViewModel
+            {
+                ID = x.ID,
+                Name = x.Name,
+                UPC = x.UPC,
+                ItemPrice = x.ItemPrice.AsCurrency(),
                 StockCount = x.StockCount
             }).ToList();
         } 
@@ -57,11 +70,22 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
             }
         }
 
-        public StagedItemDTO GetStagedItemByUPC(string UPC)
+        public StagedItemsViewModel GetStagedItemByUPC(string UPC)
         {
             try
             {
-                return ConvertEntityToDTO(_stagedItemDal.Get(UPC));
+                return ConvertEntityToViewModel(_stagedItemDal.Get(UPC));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public StagedItemDTO GetStagedItemDTOByUPC(string UPC)
+        {
+            try
+            {
+                return EntityToDTOMapper(_stagedItemDal.Get(UPC));
             }
             catch (Exception)
             {
@@ -69,10 +93,10 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
             }
         }
 
-        public ItemViewModel GetItemWithStagedItemReflectedOnItByUPC(string UPC)
+        public ItemViewModelStringItemPrice GetItemWithStagedItemReflectedOnItByUPC(string UPC)
         {
             var staged = GetStagedItemByUPC(UPC);
-            return new ItemViewModel
+            return new ItemViewModelStringItemPrice
             {
                 Name = staged.Name,
                 UPC = staged.UPC,
@@ -120,16 +144,29 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
             };
         }
 
+        private StagedItemDTO EntityToDTOMapper(StagedItem entity)
+        {
+            return new StagedItemDTO
+            {
+                ID = entity.ID, 
+                ItemPrice = entity.ItemPrice,
+                Name = CleanName(entity.Name),
+                UPC = entity.UPC,
+                StockCount = entity.StockCount
+            };
+
+        }
+
         private string CleanName(string name)
         {
             return name.Split('/')[0];
         }
 
-        private StagedItemDTO ConvertEntityToDTO(StagedItem entity)
+        private StagedItemsViewModel ConvertEntityToViewModel(StagedItem entity)
         {
-            return new StagedItemDTO
+            return new StagedItemsViewModel
             {
-                ItemPrice = entity.ItemPrice,
+                ItemPrice = entity.ItemPrice.AsCurrency(),
                 Name = entity.Name,
                 StockCount = entity.StockCount,
                 UPC = entity.UPC

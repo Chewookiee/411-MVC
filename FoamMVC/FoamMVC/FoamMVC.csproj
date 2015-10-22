@@ -215,6 +215,7 @@
     <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\IUserScoreForDescriptorDAL.cs" />
     <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\UserScoreForDescriptorDAL.cs" />
     <Compile Include="DTOs\StagedItemDTO.cs" />
+    <Compile Include="ExtensionMethods\CurrencyExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -262,6 +263,7 @@
     <Compile Include="ViewModels\PalletGroupViewModel.cs" />
     <Compile Include="ViewModels\ReviewScoreForDescriptorViewModel.cs" />
     <Compile Include="ViewModels\ReviewViewModel.cs" />
+    <Compile Include="ViewModels\StagedItemsViewModel.cs" />
     <Compile Include="ViewModels\TagViewModel.cs" />
     <Compile Include="ViewModels\UserScoreForDescriptorViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
@@ -425,8 +427,8 @@
     <Content Include="Views\AdminPalletDescriptors\Edit.cshtml" />
     <Content Include="Views\AdminPalletDescriptors\Create.cshtml" />
     <Content Include="Views\AdminPalletDescriptors\Delete.cshtml" />
-    <Content Include="Views\StagedItem\Index.cshtml" />
     <Content Include="Views\StagedItem\CompleteStaged.cshtml" />
+    <Content Include="Views\StagedItem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

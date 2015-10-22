@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using FoamMVC.DTOs;
+using FoamMVC.ExtensionMethods;
 
 namespace FoamMVC.BLL.CRUD.ItemOperations
 {
@@ -49,7 +50,7 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
                 ItemName = x.Name,
                 CompanyName = x.Company.Name,
                 StockCount = x.StockCount,
-                ItemPrice = x.ItemPrice
+                ItemPrice = x.ItemPrice.AsCurrency()
             });
             return itemsToReturn.ToList();
         }

@@ -181,7 +181,7 @@ namespace FoamMVC.Migrations
             var items = new List<Item>
             {
                 new Item { Name = "Boston Lager", UPC = "0000000", IsFeatured = true,
-                    ImagePath = null, StockCount = 50, ItemPrice = 2.99, IsDeleted = false,
+                    ImagePath = null, StockCount = 50, ItemPrice = 299, IsDeleted = false,
                     DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null,
                     PalletGroupID = palletGroups.Single(p => p.Name.Equals("Lager")).ID,
                     CompanyID = companies.Single(c => c.Name.Equals("Samuel Adams")).ID,
@@ -189,7 +189,7 @@ namespace FoamMVC.Migrations
                     Tags = new List<Tag>(), },
 
                 new Item { Name = "Shiner Bock", UPC = "1111111", IsFeatured = true,
-                    ImagePath = null, StockCount = 25, ItemPrice = 1.99, IsDeleted = false,
+                    ImagePath = null, StockCount = 25, ItemPrice = 199, IsDeleted = false,
                     DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null,
                     PalletGroupID = palletGroups.Single(p => p.Name.Equals("Lager")).ID,
                     CompanyID = companies.Single(c => c.Name.Equals("Spoetzl Brewery")).ID,
@@ -197,7 +197,7 @@ namespace FoamMVC.Migrations
                     Tags = new List<Tag>(), },
 
                 new Item { Name = "Rebel IPA", UPC = "2222222", IsFeatured = true,
-                    ImagePath = null, StockCount = 34, ItemPrice = 4.49, IsDeleted = false,
+                    ImagePath = null, StockCount = 34, ItemPrice = 449, IsDeleted = false,
                     DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null,
                     PalletGroupID = palletGroups.Single(p => p.Name.Equals("IPA")).ID,
                     CompanyID = companies.Single(c => c.Name.Equals("Samuel Adams")).ID,
@@ -205,7 +205,7 @@ namespace FoamMVC.Migrations
                     Tags = new List<Tag>(), },
 
                 new Item { Name = "Guinness Extra Stout", UPC = "3333333", IsFeatured = true,
-                    ImagePath = null, StockCount = 34, ItemPrice = 4.49, IsDeleted = false,
+                    ImagePath = null, StockCount = 34, ItemPrice = 449, IsDeleted = false,
                     DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null,
                     PalletGroupID = palletGroups.Single(p => p.Name.Equals("Stout")).ID,
                     CompanyID = companies.Single(c => c.Name.Equals("Guinness Brewery")).ID,
