@@ -65,7 +65,7 @@ namespace FoamMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePalletGroup(PalletGroupCreateViewModel palletGroupCreate)
+        public ActionResult CreatePalletGroup(PalletGroupCreateViewModel_Old palletGroupCreate)
         {
             if (!ModelState.IsValid)
             {

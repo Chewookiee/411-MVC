@@ -18,5 +18,10 @@ namespace FoamMVC.ExtensionMethods
             double result = value/100;
             return result.ToString("C", culture);
         }
+
+        public static double CurrencyAsDouble(this string value)
+        {
+            return Convert.ToDouble(value.Replace("$", String.Empty))*100;
+        }
     }
 }
