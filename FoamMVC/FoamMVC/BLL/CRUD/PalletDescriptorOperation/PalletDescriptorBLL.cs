@@ -12,41 +12,41 @@ namespace FoamMVC.BLL.CRUD.PalletDescriptorOperation
 {
     public class PalletDescriptorBLL
     {
-        private readonly IPalletDescriptorCRUD _palletDescriptorCRUD;
-        private readonly CategoryCRUDBLL _categoryCrudbll;
+        private readonly IPalletDescriptorDAL _palletDescriptorDal;
+        private readonly CategoryBLL _categoryBll;
 
         public PalletDescriptorBLL()
         {
-            _palletDescriptorCRUD = new PalletDescriptorCRUD();
-            _categoryCrudbll = new CategoryCRUDBLL();
+            _palletDescriptorDal = new PalletDescriptorDAL();
+            _categoryBll = new CategoryBLL();
         }
 
         public PalletDescriptorViewModel Get(int id)
         {
-            var shti = _palletDescriptorCRUD.Get(id);
+            var shti = _palletDescriptorDal.Get(id);
             return ConvertEntityToViewModel(shti);
         }
 
         public PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel GetForUpdate(int id)
         {
-            return CreateUpdateViewModel(_palletDescriptorCRUD.Get(id));
+            return CreateUpdateViewModel(_palletDescriptorDal.Get(id));
         }
 
         public List<PalletDescriptorViewModel> Get()
         {
-            return ConvertEntitiesToViewModels(_palletDescriptorCRUD.Get());
+            return ConvertEntitiesToViewModels(_palletDescriptorDal.Get());
         } 
 
         #region create/update
 
         public int CreatePalletDescriptor(PalletDescriptorViewModel viewModel)
         {
-            return _palletDescriptorCRUD.Create(ConvertViewModelToEntity(viewModel));
+            return _palletDescriptorDal.Create(ConvertViewModelToEntity(viewModel));
         }
 
         public int Update(PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel viewModel)
         {
-            return _palletDescriptorCRUD.Update(ConvertUpdateViewModelToEntity(viewModel));
+            return _palletDescriptorDal.Update(ConvertUpdateViewModelToEntity(viewModel));
         } 
         #endregion
 
@@ -54,22 +54,22 @@ namespace FoamMVC.BLL.CRUD.PalletDescriptorOperation
 
         public void Delete(PalletDescriptorViewModel viewModel)
         {
-            _palletDescriptorCRUD.Delete(ConvertViewModelToEntity(viewModel));
+            _palletDescriptorDal.Delete(ConvertViewModelToEntity(viewModel));
         }
 
         public void Delete(List<PalletDescriptorViewModel> viewModel)
         {
-            _palletDescriptorCRUD.Delete(ConvertViewModelToEntity(viewModel));
+            _palletDescriptorDal.Delete(ConvertViewModelToEntity(viewModel));
         }
 
         public void Destroy(PalletDescriptorViewModel viewModel)
         {
-            _palletDescriptorCRUD.Destroy(ConvertViewModelToEntity(viewModel));
+            _palletDescriptorDal.Destroy(ConvertViewModelToEntity(viewModel));
         }
 
         public void Destroy(List<PalletDescriptorViewModel> viewModel)
         {
-            _palletDescriptorCRUD.Destroy(ConvertViewModelToEntity(viewModel));
+            _palletDescriptorDal.Destroy(ConvertViewModelToEntity(viewModel));
         }
         #endregion
 
@@ -77,7 +77,7 @@ namespace FoamMVC.BLL.CRUD.PalletDescriptorOperation
 
         private PalletDescriptor ConvertUpdateViewModelToEntity(PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel viewModel)
         {
-            var categoryDAL = new CategoryCRUD();
+            var categoryDAL = new CategoryDAL();
 
             var entity = new PalletDescriptor
             {
@@ -97,7 +97,7 @@ namespace FoamMVC.BLL.CRUD.PalletDescriptorOperation
             {
                 ID = entity.ID,
                 Name = entity.Name,
-                AllCategories = _categoryCrudbll.GetDropDownDisplayForCategory()
+                AllCategories = _categoryBll.GetDropDownDisplayForCategory()
         };
         }
 

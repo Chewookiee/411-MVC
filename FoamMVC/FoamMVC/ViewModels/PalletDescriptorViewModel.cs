@@ -41,7 +41,7 @@ namespace FoamMVC.ViewModels
                 {
                     return _selectedCategories ??
                            (_selectedCategories =
-                               new CategoryCRUDBLL().GetCategoryNameAndID().Select(x => x.CategoryID).ToList());
+                               new CategoryBLL().GetCategoryNameAndID().Select(x => x.CategoryID).ToList());
                 }
                 set { _selectedCategories = value; }
             }
