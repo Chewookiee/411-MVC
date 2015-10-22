@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using FoamMVC.BLL.CRUD.ItemOperations;
 using FoamMVC.BLL.CRUD.StagedItemsOperations;
+using FoamMVC.ExtensionMethods;
 using FoamMVC.ViewModels;
 
 namespace FoamMVC.Controllers.Admin
@@ -39,7 +40,7 @@ namespace FoamMVC.Controllers.Admin
                 CategoryID = viewModel.CategoryID,
                 UPC = viewModel.UPC,
                 IsFeautured = viewModel.IsFeautured,
-                ItemPrice = Convert.ToDouble(viewModel.ItemPrice.Replace("$", String.Empty)),
+                ItemPrice = viewModel.ItemPrice.CurrencyAsDouble(),
                 ImagePath = viewModel.ImagePath,
                 Name = viewModel.Name
             };
