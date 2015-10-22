@@ -122,7 +122,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 
         public IList<ReviewScoreForDescriptor> Get()
         {
-            IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToReturn = db.ReviewScoreForDescriptors.ToList();
+            IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToReturn = db.ReviewScoreForDescriptors.Where(r => r.IsDeleted == false).ToList();
 
             if (reviewScoreForDescriptorsToReturn == null)
             {
@@ -134,7 +134,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 
         public ReviewScoreForDescriptor Get(int id)
         {
-            ReviewScoreForDescriptor reviewScoreForDescriptorToReturn = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == id);
+            ReviewScoreForDescriptor reviewScoreForDescriptorToReturn = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == id && i.IsDeleted == false);
 
             if (reviewScoreForDescriptorToReturn == null)
             {
@@ -146,7 +146,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 
         public int Update(ReviewScoreForDescriptor updatedReviewScoreForDescriptor)
         {
-            ReviewScoreForDescriptor reviewScoreForDescriptorToUpdate = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == updatedReviewScoreForDescriptor.ID);
+            ReviewScoreForDescriptor reviewScoreForDescriptorToUpdate = db.ReviewScoreForDescriptors.SingleOrDefault(i => i.ID == updatedReviewScoreForDescriptor.ID && i.IsDeleted == false);
 
             if (updatedReviewScoreForDescriptor == null)
             {

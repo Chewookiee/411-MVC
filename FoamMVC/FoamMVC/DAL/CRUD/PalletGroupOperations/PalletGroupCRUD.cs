@@ -37,7 +37,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 
         public IList<PalletGroup> Get()
         {
-            IList<PalletGroup> palletGroupsToReturn = db.PalletGroups.ToList();
+            IList<PalletGroup> palletGroupsToReturn = db.PalletGroups.Where(p => p.IsDeleted == false).ToList();
 
             if (palletGroupsToReturn == null)
             {
@@ -49,7 +49,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 
         public PalletGroup Get(int id)
         {
-            PalletGroup palletGroupToReturn = db.PalletGroups.SingleOrDefault(c => c.ID == id);
+            PalletGroup palletGroupToReturn = db.PalletGroups.SingleOrDefault(c => c.ID == id && c.IsDeleted == false);
 
             if (palletGroupToReturn == null)
             {
@@ -66,7 +66,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 
         public PalletGroup Get(string name)
         {
-            PalletGroup palletGroupToGet = db.PalletGroups.SingleOrDefault(c => c.Name.Equals(name));
+            PalletGroup palletGroupToGet = db.PalletGroups.SingleOrDefault(c => c.Name.Equals(name) && c.IsDeleted == false);
 
             if (palletGroupToGet == null)
             {
@@ -78,7 +78,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 
         public int Update(PalletGroup updatedPalletGroup)
         {
-            PalletGroup palletGroupToUpdate = db.PalletGroups.SingleOrDefault(c => c.ID == updatedPalletGroup.ID);
+            PalletGroup palletGroupToUpdate = db.PalletGroups.SingleOrDefault(c => c.ID == updatedPalletGroup.ID && c.IsDeleted == false);
 
             if (palletGroupToUpdate == null)
             {

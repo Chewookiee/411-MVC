@@ -111,7 +111,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 
         public List<PalletDescriptor> Get()
         {
-            List<PalletDescriptor> palletDescriptorsToReturn = db.PalletDescriptors.ToList();
+            List<PalletDescriptor> palletDescriptorsToReturn = db.PalletDescriptors.Where(p => p.IsDeleted == false).ToList();
 
             if (palletDescriptorsToReturn == null)
             {
@@ -123,7 +123,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 
         public PalletDescriptor Get(int id)
         {
-            PalletDescriptor palletDescriptorToReturn = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
+            PalletDescriptor palletDescriptorToReturn = db.PalletDescriptors.SingleOrDefault(i => i.ID == id && i.IsDeleted == false);
 
             if (palletDescriptorToReturn == null)
             {

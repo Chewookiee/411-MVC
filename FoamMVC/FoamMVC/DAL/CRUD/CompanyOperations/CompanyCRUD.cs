@@ -37,7 +37,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public void Delete(int id)
         {
-            Company companyToDelete = db.Companies.SingleOrDefault(c => c.ID == id);
+            Company companyToDelete = db.Companies.SingleOrDefault(c => c.ID == id && c.IsDeleted == false);
 
             if (companyToDelete == null)
             {
@@ -122,7 +122,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public IList<Company> Get()
         {
-            IList<Company> companiesToReturn = db.Companies.ToList();
+            IList<Company> companiesToReturn = db.Companies.Where(c => c.IsDeleted == false).ToList();
 
             if (companiesToReturn == null)
             {
@@ -136,7 +136,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public Company Get(int id)
         {
-            Company companyToReturn = db.Companies.SingleOrDefault(c => c.ID == id);
+            Company companyToReturn = db.Companies.SingleOrDefault(c => c.ID == id && c.IsDeleted == false);
 
             if (companyToReturn == null)
             {
@@ -148,7 +148,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public Company Get(string name)
         {
-            Company companyToReturn = db.Companies.SingleOrDefault(c => c.Name.Equals(name));
+            Company companyToReturn = db.Companies.SingleOrDefault(c => c.Name.Equals(name) && c.IsDeleted == false);
 
             if (companyToReturn == null)
             {
@@ -166,7 +166,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
         public int Update(Company updatedCompany)
         {
             Company companyToUpdate;
-            companyToUpdate = db.Companies.SingleOrDefault(c => c.ID == updatedCompany.ID);
+            companyToUpdate = db.Companies.SingleOrDefault(c => c.ID == updatedCompany.ID && c.IsDeleted == false);
 
             if (companyToUpdate == null)
             {

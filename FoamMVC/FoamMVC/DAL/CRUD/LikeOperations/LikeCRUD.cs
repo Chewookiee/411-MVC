@@ -123,7 +123,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public IList<Like> Get()
         {
-            IList<Like> likesToReturn = db.Likes.ToList();
+            IList<Like> likesToReturn = db.Likes.Where(i => i.IsDeleted == false).ToList();
 
             if (likesToReturn == null)
             {
@@ -135,7 +135,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public Like Get(int id)
         {
-            Like likeToReturn = db.Likes.SingleOrDefault(i => i.ID == id);
+            Like likeToReturn = db.Likes.SingleOrDefault(i => i.ID == id && i.IsDeleted == false);
 
             if (likeToReturn == null)
             {
@@ -147,7 +147,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public int Update(Like updatedLike)
         {
-            Like likeToUpdate = db.Likes.SingleOrDefault(i => i.ID == updatedLike.ID);
+            Like likeToUpdate = db.Likes.SingleOrDefault(i => i.ID == updatedLike.ID && i.IsDeleted == false);
 
             if (likeToUpdate == null)
             {

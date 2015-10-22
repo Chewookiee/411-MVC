@@ -99,7 +99,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         public IList<Review> Get()
         {
-            IList<Review> reviewsToReturn = db.Reviews.ToList();
+            IList<Review> reviewsToReturn = db.Reviews.Where(r => r.IsDeleted == false).ToList();
 
             if (reviewsToReturn == null)
             {
@@ -111,7 +111,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         public Review Get(int id)
         {
-            Review reviewToReturn = db.Reviews.SingleOrDefault(i => i.ID == id);
+            Review reviewToReturn = db.Reviews.SingleOrDefault(i => i.ID == id && i.IsDeleted == false);
 
             if (reviewToReturn == null)
             {
@@ -123,7 +123,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         public int Update(Review review)
         {
-            Review reviewToUpdate = db.Reviews.SingleOrDefault(i => i.ID == review.ID);
+            Review reviewToUpdate = db.Reviews.SingleOrDefault(i => i.ID == review.ID && i.IsDeleted == false);
 
             if (reviewToUpdate == null)
             {

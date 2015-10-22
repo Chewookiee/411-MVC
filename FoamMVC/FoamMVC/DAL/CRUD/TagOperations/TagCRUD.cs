@@ -38,7 +38,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
 
         public IList<Tag> Get()
         {
-            IList<Tag> tagsToReturn = db.Tags.ToList();
+            IList<Tag> tagsToReturn = db.Tags.Where(t => t.IsDeleted == false).ToList();
 
             if (tagsToReturn == null)
             {
@@ -50,7 +50,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
 
         public Tag Get(int id)
         {
-            Tag tagToReturn = db.Tags.SingleOrDefault(c => c.ID == id);
+            Tag tagToReturn = db.Tags.SingleOrDefault(c => c.ID == id && c.IsDeleted == false);
 
             if (tagToReturn == null)
             {
@@ -68,7 +68,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
         public Tag Get(string name)
         {
             Tag tagToReturn;
-            tagToReturn = db.Tags.SingleOrDefault(c => c.Name.Equals(name));
+            tagToReturn = db.Tags.SingleOrDefault(c => c.Name.Equals(name) && c.IsDeleted == false);
 
             if (tagToReturn == null)
             {
@@ -80,7 +80,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
 
         public int Update(Tag updatedTag)
         {
-            Tag tagToUpdate = db.Tags.SingleOrDefault(c => c.ID == updatedTag.ID);
+            Tag tagToUpdate = db.Tags.SingleOrDefault(c => c.ID == updatedTag.ID && c.IsDeleted == false);
 
             if (tagToUpdate == null)
             {

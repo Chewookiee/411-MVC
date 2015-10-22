@@ -122,7 +122,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public IList<UserScoreForDescriptor> Get()
         {
-            IList<UserScoreForDescriptor> userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.ToList();
+            IList<UserScoreForDescriptor> userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.Where(u => u.IsDeleted == false).ToList();
 
             if (userScoreForDescriptorsToReturn == null)
             {
@@ -134,7 +134,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public UserScoreForDescriptor Get(int id)
         {
-            UserScoreForDescriptor userScoreForDescriptorToReturn = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == id);
+            UserScoreForDescriptor userScoreForDescriptorToReturn = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == id && i.IsDeleted == false);
 
             if (userScoreForDescriptorToReturn == null)
             {
@@ -146,7 +146,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public int Update(UserScoreForDescriptor updatedUserScoreForDescriptor)
         {
-            UserScoreForDescriptor userScoreForDescriptorToUpdate = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == updatedUserScoreForDescriptor.ID);
+            UserScoreForDescriptor userScoreForDescriptorToUpdate = db.UserScoreForDescriptors.SingleOrDefault(i => i.ID == updatedUserScoreForDescriptor.ID && i.IsDeleted == false);
 
             if (userScoreForDescriptorToUpdate == null)
             {

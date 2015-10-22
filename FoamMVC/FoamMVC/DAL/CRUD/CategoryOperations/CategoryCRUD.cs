@@ -38,7 +38,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
 
         public IList<Category> Get()
         {
-            IList<Category> categoriesToReturn = db.Categories.ToList();
+            IList<Category> categoriesToReturn = db.Categories.Where(c => c.IsDeleted == false).ToList();
 
             if (categoriesToReturn == null)
             {
@@ -49,7 +49,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
         }
         public Category Get(int id)
         {
-            Category categoryToReturn = db.Categories.SingleOrDefault(c => c.ID == id);
+            Category categoryToReturn = db.Categories.SingleOrDefault(c => c.ID == id && c.IsDeleted == false);
 
             if (categoryToReturn == null)
             {
@@ -65,7 +65,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
         }
         public Category Get(string name)
         {
-            Category categoryToReturn = db.Categories.SingleOrDefault(c => c.Name.Equals(name));
+            Category categoryToReturn = db.Categories.SingleOrDefault(c => c.Name.Equals(name) && c.IsDeleted == false);
             
             if (categoryToReturn == null)
             {
@@ -77,7 +77,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
 
         public int Update(Category updatedCategory)
         {
-            Category categoryToUpdate = db.Categories.SingleOrDefault(c => c.ID == updatedCategory.ID);
+            Category categoryToUpdate = db.Categories.SingleOrDefault(c => c.ID == updatedCategory.ID && c.IsDeleted == false);
 
             if (categoryToUpdate == null)
             {
