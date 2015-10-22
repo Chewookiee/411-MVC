@@ -18,4 +18,10 @@ namespace FoamMVC.ViewModels
         public virtual IList<UserScoreForDescriptor> UserScoreForDescriptors { get; set; }
         public virtual IList<Category> Categories { get; set; }
     }
+
+    public class PalletDescriptorDisplayViewModel
+    {
+        public int PalletDescriptorID { get; set; }
+        public string PalletDescriptorName { get; set; }
+    }
 }
