@@ -50,7 +50,8 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
                 ItemName = x.Name,
                 CompanyName = x.Company.Name,
                 StockCount = x.StockCount,
-                ItemPrice = x.ItemPrice.AsCurrency()
+                ItemPrice = x.ItemPrice.AsCurrency(),
+                ImagePath = x.ImagePath
             });
             return itemsToReturn.ToList();
         }

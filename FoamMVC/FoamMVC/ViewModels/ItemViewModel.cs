@@ -61,6 +61,7 @@ namespace FoamMVC.ViewModels
         public string CompanyName { get; set; }
         public int StockCount { get; set; }
         public string ItemPrice { get; set; }
+        public string ImagePath { get; set; }
     }
 
     public class ItemDisplaySingleViewModel
