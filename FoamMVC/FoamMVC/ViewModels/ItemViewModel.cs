@@ -29,4 +29,28 @@ namespace FoamMVC.ViewModels
         public virtual IList<Tag> Tags { get; set; }
         public virtual IList<Like> Likes { get; set; }
     }
+
+    public class ItemDisplayViewModel
+    {
+        public int ID { get; set; }
+        public string ItemName { get; set; }
+        public string CompanyName { get; set; }
+        public int StockCount { get; set; }
+        public double ItemPrice { get; set; }
+    }
+
+    public class ItemDisplaySingleViewModel
+    {
+        public int ID { get; set; }
+        public string ItemName { get; set; }
+        public string CategoryName { get; set; }
+        public string CompanyName { get; set; }
+        public string Location { get; set; }
+        public string ImagePath { get; set; }
+        public int StockCount { get; set; }
+        public double ItemPrice { get; set; }
+        public List<string> Tags { get; set; }
+        public List<PalletDescriptorDisplayViewModel> PalletDescriptors { get; set; }
+
+    }
 }

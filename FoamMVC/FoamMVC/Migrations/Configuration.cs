@@ -20,11 +20,11 @@ namespace FoamMVC.Migrations
 
             var locations = new List<Location>
             {
-                new Location() { PrimaryLocation = "Boston, MA", SecondaryLocation = "", IsDeleted = false,
+                new Location() { PrimaryLocation = "MA", SecondaryLocation = "Boston", IsDeleted = false,
                 DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null},
-                new Location() { PrimaryLocation = "Madisonville, LA", SecondaryLocation = "", IsDeleted = false,
+                new Location() { PrimaryLocation = "LA", SecondaryLocation = "Madisonville", IsDeleted = false,
                 DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null},
-                new Location() { PrimaryLocation = "Ireland", SecondaryLocation = "", IsDeleted = false,
+                new Location() { PrimaryLocation = "Ireland", SecondaryLocation = null, IsDeleted = false,
                 DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null}
             };
             locations.ForEach(s => context.Locations.AddOrUpdate(l => l.PrimaryLocation, s));
@@ -38,11 +38,11 @@ namespace FoamMVC.Migrations
             {
                 new Company() { Name = "Boston Beer", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
                     DateUpdated = null,
-                    LocationID = locations.Single( s => s.PrimaryLocation.Equals("Boston, MA")).ID,
+                    LocationID = locations.Single( s => s.PrimaryLocation.Equals("MA")).ID,
                     Items = new List<Item>() },
                 new Company() { Name = "Champagne Beverage", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
                     DateUpdated = null,
-                    LocationID = locations.Single( s => s.PrimaryLocation.Equals("Madisonville, LA")).ID,
+                    LocationID = locations.Single( s => s.PrimaryLocation.Equals("LA")).ID,
                     Items = new List<Item>() },
                 new Company() { Name = "Guinness", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
                     DateUpdated = null,

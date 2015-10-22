@@ -166,6 +166,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\AveragePalletDescriptorScore.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="BLL\CRUD\CompanyOperations\CompanyCRUDBLL.cs" />
     <Compile Include="BLL\CRUD\ItemOperations\ItemCRUDBLL.cs" />
     <Compile Include="BLL\CRUD\LocationOperations\LocationCRUDBLL.cs" />
+    <Compile Include="BLL\CRUD\PalletDescriptorOperation\PalletDescriptorBLL.cs" />
     <Compile Include="BLL\CRUD\PalletGroupOperations\PalletGroupCRUDBLL.cs" />
     <Compile Include="BLL\CRUD\StagedItemsOperations\StagedItemCRUDBLL.cs" />
     <Compile Include="CloverReader\CloverClient.cs" />
@@ -182,8 +184,9 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Admin\AdminLocationsController.cs" />
     <Compile Include="Controllers\Admin\TestsController.cs" />
+    <Compile Include="Controllers\Client\ItemController.cs" />
+    <Compile Include="Controllers\Admin\AdminPalletDescriptorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\CRUD\BaseOperations\BaseCRUD.cs" />
     <Compile Include="DAL\CRUD\CategoryOperations\CategoryCRUD.cs" />
@@ -269,6 +272,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\NoBeerPicture.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -332,6 +336,9 @@
     <Content Include="Views\AdminLocations\Create.cshtml" />
     <Content Include="Views\AdminLocations\Edit.cshtml" />
     <Content Include="Views\AdminLocations\Delete.cshtml" />
+    <Content Include="Views\Item\Details.cshtml" />
+    <Content Include="Views\AdminPalletDescriptors\Index.cshtml" />
+    <Content Include="Views\AdminPalletDescriptors\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
