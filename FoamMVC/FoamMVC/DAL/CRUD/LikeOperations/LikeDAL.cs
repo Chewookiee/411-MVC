@@ -9,12 +9,12 @@ using System.Data.Entity.Migrations;
 
 namespace FoamMVC.DAL.CRUD.LikeOperations
 {
-    public class LikeCRUD : BaseCRUD, ILikeCRUD
+    public class LikeDAL : BaseDAL, ILikeDAL
     {
-        public LikeCRUD() : base()
+        public LikeDAL() : base()
         {
         }
-        public LikeCRUD(ApplicationDbContext context) : base(context)
+        public LikeDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -40,7 +40,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
             Delete(likeToDelete.ID);
         }
 
-        public void Delete(IList<int> likesToDelete)
+        public void Delete(List<int> likesToDelete)
         {
             if (likesToDelete == null)
             {
@@ -67,7 +67,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
             db.SaveChanges(); 
         }
 
-        public void Delete(IList<Like> likesToDelete)
+        public void Delete(List<Like> likesToDelete)
         {
             if (likesToDelete == null)
             {
@@ -97,7 +97,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
             Destroy(likeToDestroy.ID);
         }
 
-        public void Destroy(IList<int> likesToDestroy)
+        public void Destroy(List<int> likesToDestroy)
         {
             if (likesToDestroy == null)
             {
@@ -109,7 +109,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
             }
         }
 
-        public void Destroy(IList<Like> likesToDestroy)
+        public void Destroy(List<Like> likesToDestroy)
         {
             if (likesToDestroy == null)
             {
@@ -121,9 +121,9 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
             }
         }
 
-        public IList<Like> Get()
+        public List<Like> Get()
         {
-            IList<Like> likesToReturn = db.Likes.ToList();
+            List<Like> likesToReturn = db.Likes.ToList();
 
             if (likesToReturn == null)
             {

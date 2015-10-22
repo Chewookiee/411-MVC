@@ -13,7 +13,7 @@ namespace FoamMVC.Controllers
     {
         public ActionResult Index()
         {
-            IItemCRUD x = new ItemCRUD();
+            IItemDAL x = new ItemDAL();
             ApplicationDbContext db = new ApplicationDbContext();
             var item = x.Get();
             return View();

@@ -8,16 +8,16 @@ using System.Web;
 
 namespace FoamMVC.DAL.CRUD.BaseOperations
 {
-    public class BaseCRUD
+    public class BaseDAL
     {
         public ApplicationDbContext db { get; set; }
 
-        public BaseCRUD()
+        public BaseDAL()
             : this(new ApplicationDbContext())
         {
         }
 
-        public BaseCRUD(ApplicationDbContext db)
+        public BaseDAL(ApplicationDbContext db)
         {
             this.db = db;
         }

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace FoamMVC.DAL.CRUD.LocationOperations
 {
-    interface ILocationCRUD
+    interface ILocationDAL
     {
         int Create(Location locationToCreate);
-        IList<Location> Get();
+        List<Location> Get();
         Location Get(int id);
         int Update(Location updatedLocation);
-        void Delete(IList<Location> locationsToDelete);
-        void Delete(IList<int> locationsToDelete);
+        void Delete(List<Location> locationsToDelete);
+        void Delete(List<int> locationsToDelete);
         void Delete(Location locationToDelete);
         void Delete(int id);
-        void Destroy(IList<Location> locationsToDestroy);
-        void Destroy(IList<int> locationsToDestroy);
+        void Destroy(List<Location> locationsToDestroy);
+        void Destroy(List<int> locationsToDestroy);
         void Destroy(Location locationToDestroy);
         void Destroy(int id);
     }

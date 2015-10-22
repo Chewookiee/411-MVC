@@ -8,17 +8,17 @@ using FoamMVC.ViewModels;
 
 namespace FoamMVC.BLL.CRUD.CompanyOperations
 {
-    public class CompanyCRUDBLL
+    public class CompanyBLL
     {
-        private readonly CompanyCRUD _companyCRUD;
-        public CompanyCRUDBLL()
+        private readonly ICompanyDAL _companyDal;
+        public CompanyBLL()
         {
-            _companyCRUD = new CompanyCRUD();
+            _companyDal = new CompanyDAL();
         }
         #region Gets
         public IList<CompanyViewModel> GetItemsNameAndID()
         {
-            var itemsToReturn = _companyCRUD.Get().Select(x => new CompanyViewModel
+            var itemsToReturn = _companyDal.Get().Select(x => new CompanyViewModel
             {
                 CompanyID = x.ID,
                 Name = x.Name
@@ -31,7 +31,7 @@ namespace FoamMVC.BLL.CRUD.CompanyOperations
         #region Create/Update
         public int CreateCompany(CompanyCreateViewModel viewModel)
         {
-            return _companyCRUD.Create(new Company
+            return _companyDal.Create(new Company
             {
                 Name = viewModel.Name,
                 LocationID = viewModel.LocationID,
@@ -41,30 +41,30 @@ namespace FoamMVC.BLL.CRUD.CompanyOperations
 
         public int UpdateItem(CompanyViewModel viewModel)
         {
-            return _companyCRUD.Update(ConvertViewModelToEntity(viewModel));
+            return _companyDal.Update(ConvertViewModelToEntity(viewModel));
         }
         #endregion
         #region Delete/Destroy
         public void DeleteItem(CompanyViewModel viewModel)
         {
-            _companyCRUD.Create(ConvertViewModelToEntity(viewModel));
+            _companyDal.Create(ConvertViewModelToEntity(viewModel));
         }
 
         public void DeleteItems(List<CompanyViewModel> viewModels)
         {
             var items = viewModels.Select(ConvertViewModelToEntity).ToList();
-            _companyCRUD.Delete(items);
+            _companyDal.Delete(items);
         }
 
         public void DestroyItem(CompanyViewModel viewModel)
         {
-            _companyCRUD.Destroy(ConvertViewModelToEntity(viewModel));
+            _companyDal.Destroy(ConvertViewModelToEntity(viewModel));
         }
 
         public void DestroyItems(List<CompanyViewModel> viewModels)
         {
             var items = viewModels.Select(ConvertViewModelToEntity).ToList();
-            _companyCRUD.Destroy(items);
+            _companyDal.Destroy(items);
 
         }
         #endregion

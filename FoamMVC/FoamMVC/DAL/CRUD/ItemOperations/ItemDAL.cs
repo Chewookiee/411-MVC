@@ -9,12 +9,12 @@ using System.Data.Entity.Migrations;
 
 namespace FoamMVC.DAL.CRUD.ItemOperations
 {
-    public class ItemCRUD : BaseCRUD, IItemCRUD
+    public class ItemDAL : BaseDAL, IItemDAL
     {
-        public ItemCRUD() : base()
+        public ItemDAL() : base()
         {
         }
-        public ItemCRUD(ApplicationDbContext context) : base(context)
+        public ItemDAL(ApplicationDbContext context) : base(context)
         {
         }
         public int Update(StagedItem stagedItem)
@@ -68,7 +68,7 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
             Delete(itemToDelete.ID);
         }
 
-        public void Delete(IList<int> itemsToDelete)
+        public void Delete(List<int> itemsToDelete)
         {
             if (itemsToDelete == null)
             {
@@ -80,7 +80,7 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
             }
         }
 
-        public void Delete(IList<Item> itemsToDelete)
+        public void Delete(List<Item> itemsToDelete)
         {
             if (itemsToDelete == null)
             {
@@ -92,7 +92,7 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
             }
         }
 
-        public void Destroy(IList<int> itemsToDestroy)
+        public void Destroy(List<int> itemsToDestroy)
         {
             if (itemsToDestroy == null)
             {
@@ -122,7 +122,7 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
             Destroy(itemToDestroy.ID);
         }
 
-        public void Destroy(IList<Item> itemsToDestroy)
+        public void Destroy(List<Item> itemsToDestroy)
         {
             if (itemsToDestroy == null)
             {
@@ -134,9 +134,9 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
             }
         }
 
-        public IList<Item> Get()
+        public List<Item> Get()
         {
-            IList<Item> itemsToReturn = db.Items.ToList();
+            List<Item> itemsToReturn = db.Items.ToList();
 
             if (itemsToReturn == null)
             {

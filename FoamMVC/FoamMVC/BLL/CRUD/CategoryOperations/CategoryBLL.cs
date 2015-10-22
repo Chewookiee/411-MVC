@@ -9,19 +9,19 @@ using FoamMVC.ViewModels;
 
 namespace FoamMVC.BLL.CRUD.CategoryOperations
 {
-    public class CategoryCRUDBLL
+    public class CategoryBLL
     {
-        private readonly ICategoryCRUD _categoryCrud;
+        private readonly ICategoryDAL _categoryDal;
 
-        public CategoryCRUDBLL()
+        public CategoryBLL()
         {
-            _categoryCrud = new CategoryCRUD();     
+            _categoryDal = new CategoryDAL();     
         }
 
         #region Gets
         public IList<CategoryViewModel> GetCategoryNameAndID()
         {
-            var viewModel = _categoryCrud.Get().Select(x => new CategoryViewModel
+            var viewModel = _categoryDal.Get().Select(x => new CategoryViewModel
             {
                 CategoryID = x.ID,
                 Name = x.Name
@@ -32,7 +32,7 @@ namespace FoamMVC.BLL.CRUD.CategoryOperations
 
         public List<SelectListItem> GetCategoryForDropDownList()
         {
-            return _categoryCrud.Get().Select(x => new SelectListItem
+            return _categoryDal.Get().Select(x => new SelectListItem
             {
                 Text = x.Name,
                 Value = x.ID.ToString()
@@ -42,13 +42,13 @@ namespace FoamMVC.BLL.CRUD.CategoryOperations
 
         public CategoryDisplayViewModel GetSingleCategoryByIDForDisplay(int id)
         {
-            Category DALCategory = _categoryCrud.Get(id);
+            Category DALCategory = _categoryDal.Get(id);
             return ConvertCategoryToCategoryDisplayViewModel(DALCategory);
         }
 
         public List<SelectListItem> GetDropDownDisplayForCategory()
         {
-           return _categoryCrud.Get().Select(x => new SelectListItem
+           return _categoryDal.Get().Select(x => new SelectListItem
             {
                 Value = x.ID.ToString(),
                 Text = x.Name
@@ -61,12 +61,12 @@ namespace FoamMVC.BLL.CRUD.CategoryOperations
 
         public int CreateCategory(CategoryCreateViewModel viewModel)
         {
-            return _categoryCrud.Create(ConvertViewModelToEntity(viewModel));
+            return _categoryDal.Create(ConvertViewModelToEntity(viewModel));
         }
 
         public int UpdateCategory(CategoryUpdateViewModel viewModel)
         {
-            return _categoryCrud.Update(ConvertViewModelToEntity(viewModel));
+            return _categoryDal.Update(ConvertViewModelToEntity(viewModel));
         }
         #endregion
 
@@ -74,24 +74,24 @@ namespace FoamMVC.BLL.CRUD.CategoryOperations
 
         public void DeleteCategory(CategoryViewModel viewModel)
         {
-            _categoryCrud.Delete(ConvertViewModelToEntity(viewModel));
+            _categoryDal.Delete(ConvertViewModelToEntity(viewModel));
         }
 
         public void DeleteCategories(List<CategoryViewModel> viewModels)
         {
             var items = viewModels.Select(ConvertViewModelToEntity).ToList();
-            _categoryCrud.Delete(items);
+            _categoryDal.Delete(items);
         }
 
         public void DestroyCategory(CategoryViewModel viewModel)
         {
-            _categoryCrud.Destroy(ConvertViewModelToEntity(viewModel));
+            _categoryDal.Destroy(ConvertViewModelToEntity(viewModel));
         }
 
         public void DestroyCategories(List<CategoryViewModel> viewModels)
         {
             var items = viewModels.Select(ConvertViewModelToEntity).ToList();
-            _categoryCrud.Destroy(items);
+            _categoryDal.Destroy(items);
         }
         #endregion
 

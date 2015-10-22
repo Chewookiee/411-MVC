@@ -8,12 +8,12 @@ using System.Data.Entity.Migrations;
 
 namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 {
-    public class UserScoreForDescriptorCRUD : BaseCRUD, IUserScoreForDescriptorCRUD
+    public class UserScoreForDescriptorDAL : BaseDAL, IUserScoreForDescriptorDAL
     {
-        public UserScoreForDescriptorCRUD() : base()
+        public UserScoreForDescriptorDAL() : base()
         {
         }
-        public UserScoreForDescriptorCRUD(ApplicationDbContext context) : base(context)
+        public UserScoreForDescriptorDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -34,7 +34,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
             return idOfUserScoreForDescriptor;
         }
 
-        public void Delete(IList<int> userScoreForDescriptorsToDelete)
+        public void Delete(List<int> userScoreForDescriptorsToDelete)
         {
             if (userScoreForDescriptorsToDelete == null)
             {
@@ -66,7 +66,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
             db.SaveChanges();
         }
 
-        public void Delete(IList<UserScoreForDescriptor> userScoreForDescriptorsToDelete)
+        public void Delete(List<UserScoreForDescriptor> userScoreForDescriptorsToDelete)
         {
             if (userScoreForDescriptorsToDelete == null)
             {
@@ -96,7 +96,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
             Destroy(userScoreForDescriptorToDestroy.ID);
         }
 
-        public void Destroy(IList<int> userScoreForDescriptorsToDestroy)
+        public void Destroy(List<int> userScoreForDescriptorsToDestroy)
         {
             if (userScoreForDescriptorsToDestroy == null)
             {
@@ -108,7 +108,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
             }
         }
 
-        public void Destroy(IList<UserScoreForDescriptor> userScoreForDescriptorsToDestroy)
+        public void Destroy(List<UserScoreForDescriptor> userScoreForDescriptorsToDestroy)
         {
             if (userScoreForDescriptorsToDestroy == null)
             {
@@ -120,9 +120,9 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
             }
         }
 
-        public IList<UserScoreForDescriptor> Get()
+        public List<UserScoreForDescriptor> Get()
         {
-            IList<UserScoreForDescriptor> userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.ToList();
+            List<UserScoreForDescriptor> userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.ToList();
 
             if (userScoreForDescriptorsToReturn == null)
             {

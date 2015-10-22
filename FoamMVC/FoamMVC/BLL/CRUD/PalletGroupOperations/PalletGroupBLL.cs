@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FoamMVC.BLL.CRUD.PalletGroupOperations
 {
-    public class PalletGroupCRUDBLL
+    public class PalletGroupBLL
     {
         
     }

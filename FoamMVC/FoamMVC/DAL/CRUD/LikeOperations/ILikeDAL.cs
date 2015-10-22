@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace FoamMVC.DAL.CRUD.LikeOperations
 {
-    public interface ILikeCRUD
+    public interface ILikeDAL
     {
         int Create(Like likeToCreate);
-        IList<Like> Get();
+        List<Like> Get();
         Like Get(int id);
         int Update(Like updatedLike);
-        void Delete(IList<Like> likesToDelete);
-        void Delete(IList<int> likesToDelete);
+        void Delete(List<Like> likesToDelete);
+        void Delete(List<int> likesToDelete);
         void Delete(Like likeToDelete);
         void Delete(int id);
-        void Destroy(IList<Like> likesToDestroy);
-        void Destroy(IList<int> likesToDestroy);
+        void Destroy(List<Like> likesToDestroy);
+        void Destroy(List<int> likesToDestroy);
         void Destroy(Like likeToDestroy);
         void Destroy(int id);
     }

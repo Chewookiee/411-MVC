@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 {
-    public interface IPalletDescriptorCRUD
+    public interface IPalletDescriptorDAL
     {
         int Create(PalletDescriptor palletDescriptorToCreate);
         List<PalletDescriptor> Get();

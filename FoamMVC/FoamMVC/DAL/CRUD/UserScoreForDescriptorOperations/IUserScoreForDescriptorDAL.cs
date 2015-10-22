@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 {
-    public interface IUserScoreForDescriptorCRUD
+    public interface IUserScoreForDescriptorDAL
     {
         int Create(UserScoreForDescriptor userScoreForDescriptorToCreate);
-        IList<UserScoreForDescriptor> Get();
+        List<UserScoreForDescriptor> Get();
         UserScoreForDescriptor Get(int id);
         int Update(UserScoreForDescriptor updatedUserScoreForDescriptor);
-        void Delete(IList<UserScoreForDescriptor> userScoreForDescriptorsToDelete);
-        void Delete(IList<int> userScoreForDescriptorsToDelete);
+        void Delete(List<UserScoreForDescriptor> userScoreForDescriptorsToDelete);
+        void Delete(List<int> userScoreForDescriptorsToDelete);
         void Delete(UserScoreForDescriptor userScoreForDescriptorToDelete);
         void Delete(int id);
-        void Destroy(IList<UserScoreForDescriptor> userScoreForDescriptorsToDestroy);
-        void Destroy(IList<int> userScoreForDescriptorsToDestroy);
+        void Destroy(List<UserScoreForDescriptor> userScoreForDescriptorsToDestroy);
+        void Destroy(List<int> userScoreForDescriptorsToDestroy);
         void Destroy(UserScoreForDescriptor userScoreForDescriptorToDestroy);
         void Destroy(int id);
     }

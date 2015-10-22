@@ -8,13 +8,13 @@ using FoamMVC.Models;
 
 namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 {
-    public class PalletGroupCRUD : BaseCRUD, IPalletGroupCRUD 
+    public class PalletGroupDAL : BaseDAL, IPalletGroupDAL 
     {
-        public PalletGroupCRUD() : base()
+        public PalletGroupDAL() : base()
         {
         }
 
-        public PalletGroupCRUD(ApplicationDbContext context) : base(context)
+        public PalletGroupDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -35,9 +35,9 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
             return idOfPalletGroup;
         }
 
-        public IList<PalletGroup> Get()
+        public List<PalletGroup> Get()
         {
-            IList<PalletGroup> palletGroupsToReturn = db.PalletGroups.ToList();
+            List<PalletGroup> palletGroupsToReturn = db.PalletGroups.ToList();
 
             if (palletGroupsToReturn == null)
             {
@@ -94,7 +94,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
             return idOfPalletGroup;
         }
 
-        public void Delete(IList<PalletGroup> palletGroupsToDelete)
+        public void Delete(List<PalletGroup> palletGroupsToDelete)
         {
             if (palletGroupsToDelete == null)
             {
@@ -105,7 +105,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
                 Delete(palletGroup);
             }
         }
-        public void Delete(IList<int> palletGroupsToDelete)
+        public void Delete(List<int> palletGroupsToDelete)
         {
             if (palletGroupsToDelete == null)
             {
@@ -136,7 +136,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
             db.SaveChanges();
         }
 
-        public void Destroy(IList<PalletGroup> palletGroupsToDestroy)
+        public void Destroy(List<PalletGroup> palletGroupsToDestroy)
         {
             if (palletGroupsToDestroy == null)
             {
@@ -148,7 +148,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
             }
         }
 
-        public void Destroy(IList<int> palletGroupsToDestroy)
+        public void Destroy(List<int> palletGroupsToDestroy)
         {
             if (palletGroupsToDestroy == null)
             {

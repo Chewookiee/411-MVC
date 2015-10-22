@@ -9,12 +9,12 @@ using System.Data.Entity.Migrations;
 
 namespace FoamMVC.DAL.CRUD.ReviewOperations
 {
-    public class ReviewCRUD : BaseCRUD, IReviewCRUD
+    public class ReviewDAL : BaseDAL, IReviewDAL
     {
-        public ReviewCRUD() : base()
+        public ReviewDAL() : base()
         {
         }
-        public ReviewCRUD(ApplicationDbContext context) : base(context)
+        public ReviewDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -55,7 +55,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
             db.SaveChanges();
         }
 
-        public void Delete(IList<Review> reviewsToDelete)
+        public void Delete(List<Review> reviewsToDelete)
         {
             if (reviewsToDelete == null)
             {
@@ -85,7 +85,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
             Destroy(reviewToDestroy.ID);
         }
 
-        public void Destroy(IList<Review> reviewsToDestroy)
+        public void Destroy(List<Review> reviewsToDestroy)
         {
             if (reviewsToDestroy == null)
             {
@@ -97,9 +97,9 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
             }
         }
 
-        public IList<Review> Get()
+        public List<Review> Get()
         {
-            IList<Review> reviewsToReturn = db.Reviews.ToList();
+            List<Review> reviewsToReturn = db.Reviews.ToList();
 
             if (reviewsToReturn == null)
             {

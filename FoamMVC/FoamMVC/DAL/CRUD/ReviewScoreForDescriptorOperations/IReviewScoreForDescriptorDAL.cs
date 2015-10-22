@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 {
-    public interface IReviewScoreForDescriptorCRUD
+    public interface IReviewScoreForDescriptorDAL
     {
         int Create(ReviewScoreForDescriptor reviewScoreForDescriptorToCreate);
-        IList<ReviewScoreForDescriptor> Get();
+        List<ReviewScoreForDescriptor> Get();
         ReviewScoreForDescriptor Get(int id);
         int Update(ReviewScoreForDescriptor updatedReviewScoreForDescriptor);
-        void Delete(IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToDelete);
-        void Delete(IList<int> reviewScoreForDescriptorsToDelete);
+        void Delete(List<ReviewScoreForDescriptor> reviewScoreForDescriptorsToDelete);
+        void Delete(List<int> reviewScoreForDescriptorsToDelete);
         void Delete(ReviewScoreForDescriptor reviewScoreForDescriptorToDelete);
         void Delete(int id);
-        void Destroy(IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToDestroy);
-        void Destroy(IList<int> reviewScoreForDescriptorsToDestroy);
+        void Destroy(List<ReviewScoreForDescriptor> reviewScoreForDescriptorsToDestroy);
+        void Destroy(List<int> reviewScoreForDescriptorsToDestroy);
         void Destroy(ReviewScoreForDescriptor reviewScoreForDescriptorToDestroy);
         void Destroy(int id);
     }

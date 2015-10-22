@@ -8,12 +8,12 @@ using System.Data.Entity.Migrations;
 
 namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
 {
-    public class ReviewScoreForDescriptorCRUD : BaseCRUD, IReviewScoreForDescriptorCRUD
+    public class ReviewScoreForDescriptorDAL : BaseDAL, IReviewScoreForDescriptorDAL
     {
-        public ReviewScoreForDescriptorCRUD() : base()
+        public ReviewScoreForDescriptorDAL() : base()
         {
         }
-        public ReviewScoreForDescriptorCRUD(ApplicationDbContext context) : base(context)
+        public ReviewScoreForDescriptorDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -34,7 +34,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
             return idOfreviewScoreForDescriptor;
         }
 
-        public void Delete(IList<int> reviewScoreForDescriptorsToDelete)
+        public void Delete(List<int> reviewScoreForDescriptorsToDelete)
         {
             if (reviewScoreForDescriptorsToDelete == null)
             {
@@ -66,7 +66,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
             db.SaveChanges();
         }
 
-        public void Delete(IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToDelete)
+        public void Delete(List<ReviewScoreForDescriptor> reviewScoreForDescriptorsToDelete)
         {
             if (reviewScoreForDescriptorsToDelete == null)
             {
@@ -96,7 +96,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
             Destroy(reviewScoreForDescriptorToDestroy.ID);
         }
 
-        public void Destroy(IList<int> reviewScoreForDescriptorsToDestroy)
+        public void Destroy(List<int> reviewScoreForDescriptorsToDestroy)
         {
             if (reviewScoreForDescriptorsToDestroy == null)
             {
@@ -108,7 +108,7 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
             }
         }
 
-        public void Destroy(IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToDestroy)
+        public void Destroy(List<ReviewScoreForDescriptor> reviewScoreForDescriptorsToDestroy)
         {
             if (reviewScoreForDescriptorsToDestroy == null)
             {
@@ -120,9 +120,9 @@ namespace FoamMVC.DAL.CRUD.ReviewScoreForDescriptorOperations
             }
         }
 
-        public IList<ReviewScoreForDescriptor> Get()
+        public List<ReviewScoreForDescriptor> Get()
         {
-            IList<ReviewScoreForDescriptor> reviewScoreForDescriptorsToReturn = db.ReviewScoreForDescriptors.ToList();
+            List<ReviewScoreForDescriptor> reviewScoreForDescriptorsToReturn = db.ReviewScoreForDescriptors.ToList();
 
             if (reviewScoreForDescriptorsToReturn == null)
             {

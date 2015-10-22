@@ -23,7 +23,7 @@ namespace FoamMVC.ViewModels
 
     public class CompanyCreateViewModel
     {
-        private List<SelectListItem> _location = new LocationCRUDBLL().GetDropDownDisplayForLocations();
+        private List<SelectListItem> _location = new LocationBLL().GetDropDownDisplayForLocations();
 
         [Required(ErrorMessage = "A name of the company must be entered")]
         public string Name { get; set; }
@@ -36,7 +36,7 @@ namespace FoamMVC.ViewModels
         public List<SelectListItem> Location
         {
             get { return _location; }
-            set { _location = new LocationCRUDBLL().GetDropDownDisplayForLocations(); }
+            set { _location = new LocationBLL().GetDropDownDisplayForLocations(); }
         }
     }
 

@@ -9,18 +9,18 @@ using FoamMVC.ViewModels;
 
 namespace FoamMVC.BLL.CRUD.LocationOperations
 {
-    public class LocationCRUDBLL
+    public class LocationBLL
     {
-        private LocationCRUD _locationCrud;
+        private ILocationDAL _locationDal;
 
-        public LocationCRUDBLL()
+        public LocationBLL()
         {
-            _locationCrud = new LocationCRUD();
+            _locationDal = new LocationDAL();
         }
 
         public List<SelectListItem> GetDropDownDisplayForLocations()
         {
-            var locations = _locationCrud.Get();
+            var locations = _locationDal.Get();
              return locations.Select(S => new SelectListItem()
             {
                 Text = S.SecondaryLocation + ", "+ S.PrimaryLocation,
@@ -31,7 +31,7 @@ namespace FoamMVC.BLL.CRUD.LocationOperations
         #region Create/Update
         public int CreateLocation(LocationCreateViewModel viewModel)
         {
-            return _locationCrud.Create(new Location
+            return _locationDal.Create(new Location
             {
                 PrimaryLocation = viewModel.PrimaryLocation,
                 SecondaryLocation = viewModel.SecondaryLocation
@@ -40,7 +40,7 @@ namespace FoamMVC.BLL.CRUD.LocationOperations
 
         public int UpdateLocation(LocationUpdateViewModel viewModel)
         {
-            return _locationCrud.Update(new Location
+            return _locationDal.Update(new Location
             {
                 ID = viewModel.ID,
                 PrimaryLocation = viewModel.PrimaryLocation,
@@ -52,7 +52,7 @@ namespace FoamMVC.BLL.CRUD.LocationOperations
         #region Get
         public IList<LocationDisplayViewModel> GetAllLocationsForDisplay()
         {
-            return _locationCrud.Get().Select(x => new LocationDisplayViewModel
+            return _locationDal.Get().Select(x => new LocationDisplayViewModel
             {
                 ID = x.ID,
                 PrimaryLocation = x.PrimaryLocation,
@@ -64,24 +64,24 @@ namespace FoamMVC.BLL.CRUD.LocationOperations
 
         public LocationDisplayViewModel GetSingleLocationForDisplayByID(int id)
         {
-            return ConvertEntityToLocationDisplayViewModel(_locationCrud.Get(id));
+            return ConvertEntityToLocationDisplayViewModel(_locationDal.Get(id));
         }
 
         public LocationUpdateViewModel GetSingleLocationForUpdateByID(int id)
         {
-            return ConvertEntityToLocationUpdateViewModel(_locationCrud.Get(id));
+            return ConvertEntityToLocationUpdateViewModel(_locationDal.Get(id));
         }
 
         public LocationDeleteViewModel GetSingleLocationForDeleteByID(int id)
         {
-            return ConvertEntityToLocationDeleteViewModel(_locationCrud.Get(id));
+            return ConvertEntityToLocationDeleteViewModel(_locationDal.Get(id));
         }
         #endregion
 
         #region Delete
         public void DeleteLocation(LocationDeleteViewModel viewModel)
         {
-            _locationCrud.Delete(_locationCrud.Get(viewModel.ID));
+            _locationDal.Delete(_locationDal.Get(viewModel.ID));
         }
         #endregion
 

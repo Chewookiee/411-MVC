@@ -9,12 +9,12 @@ using System.Data.Entity.Migrations;
 
 namespace FoamMVC.DAL.CRUD.CompanyOperations
 {
-    public class CompanyCRUD : BaseCRUD, ICompanyCRUD
+    public class CompanyDAL : BaseDAL, ICompanyDAL
     {
-        public CompanyCRUD() : base()
+        public CompanyDAL() : base()
         {
         }
-        public CompanyCRUD(ApplicationDbContext context) : base(context)
+        public CompanyDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -54,7 +54,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
             Delete(companyToDelete.ID);
         }
 
-        public void Delete(IList<int> companiessToDelete)
+        public void Delete(List<int> companiessToDelete)
         {
             if (companiessToDelete == null)
             {
@@ -66,7 +66,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
             }
         }
 
-        public void Delete(IList<Company> companiesToDelete)
+        public void Delete(List<Company> companiesToDelete)
         {
             if (companiesToDelete == null)
             {
@@ -78,7 +78,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
             }
         }
 
-        public void Destroy(IList<int> companiesToDestroy)
+        public void Destroy(List<int> companiesToDestroy)
         {
             if (companiesToDestroy == null)
             {
@@ -108,7 +108,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
             Destroy(companyToDestroy.ID);
         }
 
-        public void Destroy(IList<Company> companiesToDestroy)
+        public void Destroy(List<Company> companiesToDestroy)
         {
             if (companiesToDestroy == null)
             {
@@ -120,9 +120,9 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
             }
         }
 
-        public IList<Company> Get()
+        public List<Company> Get()
         {
-            IList<Company> companiesToReturn = db.Companies.ToList();
+            List<Company> companiesToReturn = db.Companies.ToList();
 
             if (companiesToReturn == null)
             {

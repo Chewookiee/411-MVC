@@ -10,12 +10,12 @@ using System.Web;
 
 namespace FoamMVC.DAL.CRUD.CategoryOperations
 {
-    public class CategoryCRUD : BaseCRUD, ICategoryCRUD
+    public class CategoryDAL : BaseDAL, ICategoryDAL
     {
-        public CategoryCRUD() : base()
+        public CategoryDAL() : base()
         {
         }
-        public CategoryCRUD(ApplicationDbContext context) : base(context)
+        public CategoryDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -36,9 +36,9 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
             return idOfCategory;
         }
 
-        public IList<Category> Get()
+        public List<Category> Get()
         {
-            IList<Category> categoriesToReturn = db.Categories.ToList();
+            List<Category> categoriesToReturn = db.Categories.ToList();
 
             if (categoriesToReturn == null)
             {
@@ -93,7 +93,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
             return idOfCategory;
         }
 
-        public void Delete(IList<Category> categoriesToDelete)
+        public void Delete(List<Category> categoriesToDelete)
         {
             if (categoriesToDelete == null)
             {
@@ -104,7 +104,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
                 Delete(category);
             }
         }
-        public void Delete(IList<int> categoriesToDelete)
+        public void Delete(List<int> categoriesToDelete)
         {
             if (categoriesToDelete == null)
             {
@@ -132,7 +132,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
             db.SaveChanges();
         }
 
-        public void Destroy(IList<Category> categoriesToDestroy)
+        public void Destroy(List<Category> categoriesToDestroy)
         {
             if (categoriesToDestroy == null)
             {
@@ -143,7 +143,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
                 Destroy(category);
             }
         }
-        public void Destroy(IList<int> categoriesToDestroy)
+        public void Destroy(List<int> categoriesToDestroy)
         {
             if (categoriesToDestroy == null)
             {

@@ -7,7 +7,7 @@ using FoamMVC.Models;
 
 namespace FoamMVC.DAL.CRUD.StagedItemOperations
 {
-    public interface IStagedItemCRUD
+    public interface IStagedItemDAL
     {
         void Create(StagedItem stagedItems);
         void Update(StagedItem stagedItem);

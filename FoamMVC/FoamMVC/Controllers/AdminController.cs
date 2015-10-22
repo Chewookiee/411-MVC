@@ -12,7 +12,7 @@ namespace FoamMVC.Controllers
 {
     public class AdminController : Controller
     {
-        private CategoryCRUDBLL _categoryCRUDBLL = new CategoryCRUDBLL();
+        private CategoryBLL _categoryBll = new CategoryBLL();
 
         // GET: Admin
         public ActionResult Index()
@@ -22,7 +22,7 @@ namespace FoamMVC.Controllers
 
         public ActionResult DisplayCategory(int id)
         {
-            CategoryDisplayViewModel categoryToDisplay = _categoryCRUDBLL.GetSingleCategoryByIDForDisplay(id);
+            CategoryDisplayViewModel categoryToDisplay = _categoryBll.GetSingleCategoryByIDForDisplay(id);
 
             return View(categoryToDisplay);
         }
@@ -43,7 +43,7 @@ namespace FoamMVC.Controllers
             }
              
             // Call the BLL and send it the model categoryCreate to be created
-            int idOfCategoryCreated = _categoryCRUDBLL.CreateCategory(categoryCreate);
+            int idOfCategoryCreated = _categoryBll.CreateCategory(categoryCreate);
             return RedirectToAction("DisplayCategory", new RouteValueDictionary(
                 new { controller = "Admin", action = "DisplayCategory", Id = idOfCategoryCreated }));
         }

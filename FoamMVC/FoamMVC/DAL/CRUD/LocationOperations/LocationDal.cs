@@ -9,12 +9,12 @@ using System.Data.Entity.Migrations;
 
 namespace FoamMVC.DAL.CRUD.LocationOperations
 {
-    public class LocationCRUD : BaseCRUD, ILocationCRUD
+    public class LocationDAL : BaseDAL, ILocationDAL
     {
-        public LocationCRUD() : base()
+        public LocationDAL() : base()
         {
         }
-        public LocationCRUD(ApplicationDbContext context) : base(context)
+        public LocationDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -40,7 +40,7 @@ namespace FoamMVC.DAL.CRUD.LocationOperations
             Delete(locationToDelete.ID);
         }
 
-        public void Delete(IList<int> locationsToDelete)
+        public void Delete(List<int> locationsToDelete)
         {
             if (locationsToDelete == null)
             {
@@ -67,7 +67,7 @@ namespace FoamMVC.DAL.CRUD.LocationOperations
             db.SaveChanges();
         }
 
-        public void Delete(IList<Location> locationsToDelete)
+        public void Delete(List<Location> locationsToDelete)
         {
             if (locationsToDelete == null)
             {
@@ -97,7 +97,7 @@ namespace FoamMVC.DAL.CRUD.LocationOperations
             Destroy(locationToDestroy.ID);
         }
 
-        public void Destroy(IList<int> locationsToDestroy)
+        public void Destroy(List<int> locationsToDestroy)
         {
             if (locationsToDestroy == null)
             {
@@ -109,7 +109,7 @@ namespace FoamMVC.DAL.CRUD.LocationOperations
             }
         }
 
-        public void Destroy(IList<Location> locationsToDestroy)
+        public void Destroy(List<Location> locationsToDestroy)
         {
             if (locationsToDestroy == null)
             {
@@ -121,9 +121,9 @@ namespace FoamMVC.DAL.CRUD.LocationOperations
             }
         }
 
-        public IList<Location> Get()
+        public List<Location> Get()
         {
-            IList<Location> locationsToReturn = db.Locations.Where(l => l.IsDeleted == false).ToList();
+            List<Location> locationsToReturn = db.Locations.Where(l => l.IsDeleted == false).ToList();
 
             if (locationsToReturn == null)
             {

@@ -9,12 +9,12 @@ using System.Data.Entity.Migrations;
 
 namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 {
-    public class PalletDescriptorCRUD : BaseCRUD, IPalletDescriptorCRUD
+    public class PalletDescriptorDAL : BaseDAL, IPalletDescriptorDAL
     {
-        public PalletDescriptorCRUD() : base()
+        public PalletDescriptorDAL() : base()
         {
         }
-        public PalletDescriptorCRUD(ApplicationDbContext context) : base(context)
+        public PalletDescriptorDAL(ApplicationDbContext context) : base(context)
         {
         }
 

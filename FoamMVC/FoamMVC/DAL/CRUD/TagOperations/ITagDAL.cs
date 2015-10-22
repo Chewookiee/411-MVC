@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace FoamMVC.DAL.CRUD.TagOperations
 {
-    interface ITagCRUD
+    interface ITagDAL
     {
         int Create(Tag tagToCreate);
-        IList<Tag> Get();
+        List<Tag> Get();
         Tag Get(int id);
         Tag Get(Tag tagToGet);
         Tag Get(string name);
         int Update(Tag updatedTag);
-        void Delete(IList<Tag> categoriesToDelete);
-        void Delete(IList<int> categoriesToDelete);
+        void Delete(List<Tag> categoriesToDelete);
+        void Delete(List<int> categoriesToDelete);
         void Delete(Tag tagToDelete);
         void Delete(int id);
-        void Destroy(IList<Tag> categoriesToDestroy);
-        void Destroy(IList<int> categoriesToDestroy);
+        void Destroy(List<Tag> categoriesToDestroy);
+        void Destroy(List<int> categoriesToDestroy);
         void Destroy(Tag tagToDestroy);
         void Destroy(int id);
     }

@@ -9,15 +9,15 @@ using FoamMVC.Models;
 
 namespace FoamMVC.BLL.CRUD.StagedItemsOperations
 {
-    public class StagedItemCRUDBLL
+    public class StagedItemBLL
     {
-        private StagedItemCRUD _stagedItemCrud;
-        private ItemCRUD _itemCrud;
+        private StagedItemDAL _stagedItemDal;
+        private ItemDAL _itemDal;
 
-        public StagedItemCRUDBLL()
+        public StagedItemBLL()
         {
-            _stagedItemCrud = new StagedItemCRUD();
-            _itemCrud = new ItemCRUD();
+            _stagedItemDal = new StagedItemDAL();
+            _itemDal = new ItemDAL();
         }
 
         public void ProcessStagedItems(List<StagedItemDTO> stagedItems)
@@ -26,11 +26,11 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
             {
                 if (ItemAlreadyExits(item))
                 {
-                    _itemCrud.Update(DTOtoEntityMapper(item));
+                    _itemDal.Update(DTOtoEntityMapper(item));
                 }
                 else if (StagedItemAlreadyExists(item))
                 {
-                    _stagedItemCrud.Update(DTOtoEntityMapper(item));
+                    _stagedItemDal.Update(DTOtoEntityMapper(item));
                 }
                 else
                 {
@@ -41,22 +41,22 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
 
         private bool StagedItemAlreadyExists(StagedItemDTO item)
         {
-            return _stagedItemCrud.Get().Any(x => x.UPC == item.UPC);
+            return _stagedItemDal.Get().Any(x => x.UPC == item.UPC);
         }
 
         private void UpdateStagedItems(StagedItemDTO item)
         {
-            _stagedItemCrud.Update(DTOtoEntityMapper(item));
+            _stagedItemDal.Update(DTOtoEntityMapper(item));
         }
 
         private bool ItemAlreadyExits(StagedItemDTO item)
         {
-            return _itemCrud.Get().Any(x => x.UPC == item.UPC);
+            return _itemDal.Get().Any(x => x.UPC == item.UPC);
         }
 
         private void CreateStagedItems(StagedItemDTO stagedItemDTO)
         {
-            _stagedItemCrud.Create(DTOtoEntityMapper(stagedItemDTO));
+            _stagedItemDal.Create(DTOtoEntityMapper(stagedItemDTO));
         }
 
         private StagedItem DTOtoEntityMapper(StagedItemDTO stagedItemDTO)

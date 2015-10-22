@@ -7,17 +7,17 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace FoamMVC.BLL.CRUD.ItemOperations
 {
-    public class ItemCRUDBLL
+    public class ItemBLL
     {
-        private readonly ItemCRUD _itemCRUD;
-        public ItemCRUDBLL()
+        private readonly IItemDAL _itemDal;
+        public ItemBLL()
         {
-            _itemCRUD = new ItemCRUD();
+            _itemDal = new ItemDAL();
         }
         #region Gets
         public IList<ItemViewModel> GetItemsNameAndID()
         {
-            var itemsToReturn = _itemCRUD.Get().Select(x => new ItemViewModel
+            var itemsToReturn = _itemDal.Get().Select(x => new ItemViewModel
             {
                 ItemID = x.ID,
                 Name = x.Name
@@ -28,7 +28,7 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
 
         public IList<ItemDisplayViewModel> GetAllItemsForClient()
         {
-            var itemsToReturn = _itemCRUD.Get().Select(x => new ItemDisplayViewModel
+            var itemsToReturn = _itemDal.Get().Select(x => new ItemDisplayViewModel
             {
                 ID = x.ID,
                 ItemName = x.Name,
@@ -41,7 +41,7 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
 
         public ItemDisplaySingleViewModel GetSingleItemForDisplayByID(int id)
         {
-            return ConvertEntityToDisplaySingleViewModel(_itemCRUD.Get(id));
+            return ConvertEntityToDisplaySingleViewModel(_itemDal.Get(id));
             
         }
         #endregion
@@ -49,35 +49,35 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
         #region Create/Update
         public int CreateItem(ItemViewModel viewModel)
         {
-            return _itemCRUD.Create(ConvertViewModelToEntity(viewModel));
+            return _itemDal.Create(ConvertViewModelToEntity(viewModel));
         }
 
         public int UpdateItem(ItemViewModel viewModel)
         {
-            return _itemCRUD.Update(ConvertViewModelToEntity(viewModel));
+            return _itemDal.Update(ConvertViewModelToEntity(viewModel));
         } 
         #endregion
         #region Delete/Destroy
         public void DeleteItem(ItemViewModel viewModel)
         {
-            _itemCRUD.Create(ConvertViewModelToEntity(viewModel));
+            _itemDal.Create(ConvertViewModelToEntity(viewModel));
         }
 
         public void DeleteItems(List<ItemViewModel> viewModels)
         {
             var items = viewModels.Select(ConvertViewModelToEntity).ToList();
-            _itemCRUD.Delete(items);
+            _itemDal.Delete(items);
         }
 
         public void DestroyItem(ItemViewModel viewModel)
         {
-            _itemCRUD.Destroy(ConvertViewModelToEntity(viewModel));
+            _itemDal.Destroy(ConvertViewModelToEntity(viewModel));
         }
 
         public void DestroyItems(List<ItemViewModel> viewModels)
         {
             var items = viewModels.Select(ConvertViewModelToEntity).ToList();
-            _itemCRUD.Destroy(items);
+            _itemDal.Destroy(items);
 
         } 
         #endregion

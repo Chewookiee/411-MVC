@@ -10,12 +10,12 @@ using System.Web;
 
 namespace FoamMVC.DAL.CRUD.TagOperations
 {
-    public class TagCRUD : BaseCRUD, ITagCRUD
+    public class TagDAL : BaseDAL, ITagDAL
     {
-        public TagCRUD() : base()
+        public TagDAL() : base()
         {
         }
-        public TagCRUD(ApplicationDbContext context) : base(context)
+        public TagDAL(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -36,9 +36,9 @@ namespace FoamMVC.DAL.CRUD.TagOperations
             return idOfTag;
         }
 
-        public IList<Tag> Get()
+        public List<Tag> Get()
         {
-            IList<Tag> tagsToReturn = db.Tags.ToList();
+            List<Tag> tagsToReturn = db.Tags.ToList();
 
             if (tagsToReturn == null)
             {
@@ -96,7 +96,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
             return idOfTag;
         }
 
-        public void Delete(IList<Tag> tagsToDelete)
+        public void Delete(List<Tag> tagsToDelete)
         {
             if (tagsToDelete == null)
             {
@@ -108,7 +108,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
             }
         }
 
-        public void Delete(IList<int> tagsToDelete)
+        public void Delete(List<int> tagsToDelete)
         {
             if (tagsToDelete == null)
             {
@@ -140,7 +140,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
             db.SaveChanges();
         }
 
-        public void Destroy(IList<Tag> tagsToDestroy)
+        public void Destroy(List<Tag> tagsToDestroy)
         {
             if (tagsToDestroy == null)
             {
@@ -152,7 +152,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
             }
         }
 
-        public void Destroy(IList<int> tagsToDestroy)
+        public void Destroy(List<int> tagsToDestroy)
         {
             if (tagsToDestroy == null)
             {
