@@ -28,14 +28,11 @@
                 <li class="sidebar-brand">
                     <img id="foam-icon" src="http://icons.iconarchive.com/icons/flat-icons.com/flat/48/Beer-icon.png" />
                     <span class="nav-header">
-                        FOAM
+                        @Html.ActionLink("FOAM", "Index", "Home")
                     </span>
                 </li>
                 <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Beer</a>
+                    @Html.ActionLink("Beer", "List", "Item")
                 </li>
                 <li>
                     <a href="#">Wine</a>

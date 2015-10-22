@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Admin\AdminLocationsController.cs" />
     <Compile Include="Controllers\Admin\AdminPalletGroupController.cs" />
+    <Compile Include="Controllers\Admin\StagedItemController.cs" />
     <Compile Include="Controllers\Admin\TestsController.cs" />
     <Compile Include="Controllers\Client\ItemController.cs" />
     <Compile Include="Controllers\Admin\AdminPalletDescriptorsController.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\IUserScoreForDescriptorDAL.cs" />
     <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\UserScoreForDescriptorDAL.cs" />
     <Compile Include="DTOs\StagedItemDTO.cs" />
+    <Compile Include="ExtensionMethods\CurrencyExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -262,12 +264,15 @@
     <Compile Include="ViewModels\PalletGroupViewModel.cs" />
     <Compile Include="ViewModels\ReviewScoreForDescriptorViewModel.cs" />
     <Compile Include="ViewModels\ReviewViewModel.cs" />
+    <Compile Include="ViewModels\StagedItemsViewModel.cs" />
     <Compile Include="ViewModels\TagViewModel.cs" />
     <Compile Include="ViewModels\UserScoreForDescriptorViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin-template.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
@@ -345,6 +350,12 @@
     <Content Include="Content\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\admin-custom.js" />
     <Content Include="Scripts\client-custom.js" />
@@ -421,14 +432,13 @@
     <Content Include="Views\AdminPalletGroup\Index.cshtml" />
     <Content Include="Views\AdminPalletGroup\Details.cshtml" />
     <Content Include="Views\AdminPalletGroup\Edit.cshtml" />
+    <Content Include="Views\StagedItem\CompleteStaged.cshtml" />
+    <Content Include="Views\StagedItem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

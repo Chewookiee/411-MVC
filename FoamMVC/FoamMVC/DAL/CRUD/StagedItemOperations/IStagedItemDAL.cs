@@ -11,7 +11,9 @@ namespace FoamMVC.DAL.CRUD.StagedItemOperations
     {
         void Create(StagedItem stagedItems);
         void Update(StagedItem stagedItem);
+        void Destroy(StagedItem stagedItem);
         StagedItem Get(StagedItem item);
+        StagedItem Get(string UPC);
         List<StagedItem> Get();
     }
 }

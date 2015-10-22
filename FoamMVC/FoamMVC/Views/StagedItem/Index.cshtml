@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FoamMVC.ViewModels.StagedItemsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UPC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UPC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StockCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Complete", "CompleteStaged", new { UPC = item.UPC }) 
+        </td>
+    </tr>
+}
+
+</table>

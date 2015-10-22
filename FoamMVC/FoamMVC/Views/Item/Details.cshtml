@@ -21,7 +21,14 @@
         <div class="row">
             <div class="col-md-4 col-xs-8 col-xs-offset-2">
                 <div class="beer-pic">
-                    <img src="https://d46w5x9vt7qfg.cloudfront.net/225batonrouge/2014/11/GnarlyBarley-Catahoula-Common.jpg" alt="Catahoula Common"/>
+                    @if (Model.ImagePath == null)
+                    {
+                        <img src="~/Images/NoBeerPicture.png" alt="Unknown Image" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content(Model.ImagePath)" alt="Unknown Image" />
+                    }
                 </div>
             </div>
 
@@ -49,97 +56,118 @@
                 </div>
                 <div class="row beer-info-row">
                     <div class="col-xs-12">
-                        <span class="beer-info">Location:&nbsp;</span><span class="beer-info-value">Hammond, LA</span>
+                        <span class="beer-info">@Html.DisplayNameFor(model => model.CategoryName):&nbsp;</span><span class="beer-info-value">@Html.DisplayFor(model => model.CategoryName)</span>
                     </div>
                 </div>
                 <div class="row beer-info-row">
                     <div class="col-xs-12">
-                        <span class="beer-info">Type:&nbsp;</span><span class="beer-info-value">California Common</span>
+                        <span class="beer-info">@Html.DisplayNameFor(model => model.Location):&nbsp;</span><span class="beer-info-value">@Html.DisplayFor(model => model.Location)</span>
                     </div>
                 </div>
                 <div class="row beer-info-row">
                     <div class="col-xs-12">
-                        <span class="beer-info">ABV:&nbsp;</span><span class="beer-info-value">5.5%</span>
+                        <span class="beer-info">@Html.DisplayNameFor(model => model.CompanyName):&nbsp;</span><span class="beer-info-value">@Html.DisplayFor(model => model.CompanyName)</span>
+                    </div>
+                </div>
+                <div class="row beer-info-row">
+                    <div class="col-xs-12">
+                        <span class="beer-info">@Html.DisplayNameFor(model => model.StockCount):&nbsp;</span><span class="beer-info-value">@Html.DisplayFor(model => model.StockCount)</span>
+                    </div>
+                </div>
+                <div class="row beer-info-row">
+                    <div class="col-xs-12">
+                        <span class="beer-info">@Html.DisplayNameFor(model => model.ItemPrice):&nbsp;</span><span class="beer-info-value">@Html.DisplayFor(model => model.ItemPrice)</span>
+                    </div>
+                </div>
+                <div class="row beer-info-row">
+                    <div class="col-xs-12">
+                        <span class="beer-info">@Html.DisplayNameFor(model => model.Tags):&nbsp;</span><span class="beer-info-value">@Html.DisplayFor(model => model.Tags)</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 beer-rating-box">
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <h3>Palate Information</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="spacer"></div>
+                </div>
+                @foreach (var palletDescriptor in Model.PalletDescriptors)
+                {
+                <div class="row slider-row">
+                    <div class="col-md-2 col-xs-12">
+                        <h4>@Html.DisplayFor(x => palletDescriptor.PalletDescriptorName)</h4>
+                    </div>
+                    <div class="col-md-8 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                60
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                }
+                <div class="row submit-row">
+                    <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+                        <button class="btn btn-red review-btn" data-toggle="modal" data-target="#review-modal">Review this Beer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="review-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title">Rate this Beer</h3>
+                        <div class="row">
+                            <div class="spacer"></div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row slider-row">
+                            <div class="col-md-3 col-xs-12">
+                                <h4>Bitterness</h4>
+                            </div>
+                            <div class="col-md-7 col-xs-9" class="slider-div">
+                                <div class="flat-slider review-slider" id="review-slider0"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-3">
+                                <input type="text" id="review-slider-value0" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row slider-row">
+                            <div class="col-md-3 col-xs-12">
+                                <h4>Sweetness</h4>
+                            </div>
+                            <div class="col-md-7 col-xs-9" class="slider-div">
+                                <div class="flat-slider review-slider" id="review-slider1"></div>
+                            </div>
+                            <div class="col-md-2 col-xs-3">
+                                <input type="text" id="review-slider-value1" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-xs-4 col-xs-offset-2">
+                            <button type="button" class="btn btn-red">Submit</button>
+                        </div>
+                        <div class="col-xs-4">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div><!--/.containers-->
 </section>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.ItemName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ItemName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CategoryName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CompanyName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Location)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Location)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ImagePath)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.StockCount)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.StockCount)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ItemPrice)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ItemPrice)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Tags)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Tags)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.PalletDescriptors)
-            </dt>
-            @foreach (var asdf in Model.PalletDescriptors)
-            {
-                <dd>
-                    @Html.DisplayFor(x => asdf.PalletDescriptorName)
-                </dd>
-            }
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+       
+            
+            
+        
+ 
