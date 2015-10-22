@@ -27,7 +27,7 @@ namespace FoamMVC.BLL.CRUD.PalletDescriptorOperation
             return ConvertEntityToViewModel(shti);
         }
 
-        public PalledDescriptorUpdateViewModel GetForUpdate(int id)
+        public PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel GetForUpdate(int id)
         {
             return CreateUpdateViewModel(_palletDescriptorCRUD.Get(id));
         }
@@ -44,7 +44,7 @@ namespace FoamMVC.BLL.CRUD.PalletDescriptorOperation
             return _palletDescriptorCRUD.Create(ConvertViewModelToEntity(viewModel));
         }
 
-        public int Update(PalledDescriptorUpdateViewModel viewModel)
+        public int Update(PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel viewModel)
         {
             return _palletDescriptorCRUD.Update(ConvertUpdateViewModelToEntity(viewModel));
         } 
@@ -75,7 +75,7 @@ namespace FoamMVC.BLL.CRUD.PalletDescriptorOperation
 
         #region utils
 
-        private PalletDescriptor ConvertUpdateViewModelToEntity(PalledDescriptorUpdateViewModel viewModel)
+        private PalletDescriptor ConvertUpdateViewModelToEntity(PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel viewModel)
         {
             var categoryDAL = new CategoryCRUD();
 
@@ -91,9 +91,9 @@ namespace FoamMVC.BLL.CRUD.PalletDescriptorOperation
             }
             return entity;
         }
-        private PalledDescriptorUpdateViewModel CreateUpdateViewModel(PalletDescriptor entity)
+        private PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel CreateUpdateViewModel(PalletDescriptor entity)
         {
-            return new PalledDescriptorUpdateViewModel
+            return new PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel
             {
                 ID = entity.ID,
                 Name = entity.Name,

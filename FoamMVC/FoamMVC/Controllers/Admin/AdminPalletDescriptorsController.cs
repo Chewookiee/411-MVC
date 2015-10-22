@@ -25,7 +25,7 @@ namespace FoamMVC.Controllers.Admin
         }
 
         [HttpPost]
-        public ActionResult Edit(PalledDescriptorUpdateViewModel viewModel)
+        public ActionResult Edit(PalletDescriptorDisplayViewModel.PalledDescriptorUpdateViewModel viewModel)
         {
             _descriptorBLL.Update(viewModel);
 

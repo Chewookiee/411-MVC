@@ -3,6 +3,7 @@ using FoamMVC.Models;
 using FoamMVC.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace FoamMVC.BLL.CRUD.ItemOperations
 {
@@ -23,6 +24,25 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
             });
 
             return itemsToReturn.ToList();
+        }
+
+        public IList<ItemDisplayViewModel> GetAllItemsForClient()
+        {
+            var itemsToReturn = _itemCRUD.Get().Select(x => new ItemDisplayViewModel
+            {
+                ID = x.ID,
+                ItemName = x.Name,
+                CompanyName = x.Company.Name,
+                StockCount = x.StockCount,
+                ItemPrice = x.ItemPrice
+            });
+            return itemsToReturn.ToList();
+        }
+
+        public ItemDisplaySingleViewModel GetSingleItemForDisplayByID(int id)
+        {
+            return ConvertEntityToDisplaySingleViewModel(_itemCRUD.Get(id));
+            
         }
         #endregion
 
@@ -79,6 +99,38 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
                 Tags = viewModel.Tags,
                 Likes = viewModel.Likes
             };
+        }
+
+        private ItemDisplaySingleViewModel ConvertEntityToDisplaySingleViewModel(Item entity)
+        {
+
+            return new ItemDisplaySingleViewModel
+            {
+                ID = entity.ID,
+                ItemName = entity.Name,
+                CategoryName = entity.Category.Name,
+                CompanyName = entity.Company.Name,
+                Location = IsSecondaryLocationNull(entity.Company.Location.SecondaryLocation) + entity.Company.Location.PrimaryLocation,
+                ImagePath = entity.ImagePath,
+                StockCount = entity.StockCount,
+                ItemPrice = entity.ItemPrice,
+                Tags = entity.Tags.Select(x => x.Name).ToList(),
+                PalletDescriptors =
+                    entity.PalletGroup.PalletDescriptors.Select(x => new PalletDescriptorDisplayViewModel
+                    {
+                        PalletDescriptorID = x.ID,
+                        PalletDescriptorName = x.Name
+                    }).ToList()
+            };
+        }
+
+        private string IsSecondaryLocationNull(string secondaryLocation)
+        {
+            if (secondaryLocation != null)
+            {
+                secondaryLocation = secondaryLocation + ", ";
+            }
+            return secondaryLocation;
         } 
         #endregion
     }

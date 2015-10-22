@@ -123,7 +123,7 @@ namespace FoamMVC.DAL.CRUD.LocationOperations
 
         public IList<Location> Get()
         {
-            IList<Location> locationsToReturn = db.Locations.ToList();
+            IList<Location> locationsToReturn = db.Locations.Where(l => l.IsDeleted == false).ToList();
 
             if (locationsToReturn == null)
             {
@@ -135,7 +135,7 @@ namespace FoamMVC.DAL.CRUD.LocationOperations
 
         public Location Get(int id)
         {
-            Location locationToReturn = db.Locations.SingleOrDefault(i => i.ID == id);
+            Location locationToReturn = db.Locations.SingleOrDefault(i => i.ID == id && i.IsDeleted == false);
 
             if (locationToReturn == null)
             {
@@ -147,18 +147,20 @@ namespace FoamMVC.DAL.CRUD.LocationOperations
         
         public int Update(Location updatedLocation)
         {
-            Location locationToUpdate = db.Locations.SingleOrDefault(i => i.ID == updatedLocation.ID);
+            Location locationToUpdate = db.Locations.SingleOrDefault(i => i.ID == updatedLocation.ID && i.IsDeleted == false);
 
             if (locationToUpdate == null)
             {
                 throw new Exception("No Location exists with the id " + updatedLocation.ID);
             }
 
-            base.UpdateDateUpdated(updatedLocation);
+            locationToUpdate.PrimaryLocation = updatedLocation.PrimaryLocation;
+            locationToUpdate.SecondaryLocation = updatedLocation.SecondaryLocation;
+            base.UpdateDateUpdated(locationToUpdate);
             
-            db.Locations.AddOrUpdate(l => l.ID, updatedLocation);
+            db.Locations.AddOrUpdate(l => l.ID, locationToUpdate);
             db.SaveChanges();
-            int idOfLocation = updatedLocation.ID;
+            int idOfLocation = locationToUpdate.ID;
 
             return idOfLocation;
         }
