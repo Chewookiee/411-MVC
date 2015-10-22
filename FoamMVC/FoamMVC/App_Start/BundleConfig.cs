@@ -9,7 +9,9 @@ namespace FoamMVC
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-{version}.js"
+
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -18,7 +20,12 @@ namespace FoamMVC
             bundles.Add(new ScriptBundle("~/bundles/adminjs").Include(
                         "~/Scripts/raphael-2.1.0.min.js",
                         "~/Scripts/jquery.metisMenu.js",
-                        "~/Scripts/custom.js"));
+                        "~/Scripts/admin-custom.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/clientjs").Include(
+                        "~/Scripts/raphael-2.1.0.min.js",
+                        "~/Scripts/jquery.metisMenu.js",
+                        "~/Scripts/client-custom.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -31,6 +38,8 @@ namespace FoamMVC
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/jquery-ui.min.css",
+                      "~/Content/font-awesome/css/font-awesome.min.css",
                       "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/admincss").Include(
                       "~/Content/admin-template.css"));

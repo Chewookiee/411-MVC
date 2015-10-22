@@ -5,84 +5,141 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<section class="header-section">
+    <div class="container theme-showcase header-container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="beer-name-header">
+                    <h1 id="company-name">@Html.DisplayFor(model => model.CompanyName)</h1><h1 id="beer-name">@Html.DisplayFor(model => model.ItemName)</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="main-section">
+    <div class="container theme-showcase main-container" role="main">
+        <div class="row">
+            <div class="col-md-4 col-xs-8 col-xs-offset-2">
+                <div class="beer-pic">
+                    <img src="https://d46w5x9vt7qfg.cloudfront.net/225batonrouge/2014/11/GnarlyBarley-Catahoula-Common.jpg" alt="Catahoula Common"/>
+                </div>
+            </div>
 
-<div>
-    <h4>ItemDisplaySingleViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ItemName)
-        </dt>
+            <div class="col-xs-4 col-xs-offset-2 col-md-2 col-md-offset-0">
+                <button type="submit" id="btn-like" class="btn-glyphicon" data-active="0">
+                    <i class="fa fa-thumbs-o-up light-blue"></i>
+                    <span class="light-blue">Like</span>
+                </button>
+            </div>
+            <div class="col-xs-5 col-xs-offset-0 col-sm-3 col-sm-offset-2 col-md-2 col-md-offset-0">
+                <button type="submit" id="btn-dislike" class="btn-glyphicon" data-active="0">
+                    <i class="fa fa-thumbs-o-down red"></i>
+                    <span class="red">Dislike</span>
+                </button>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ItemName)
-        </dd>
+            <div class="col-md-4 col-xs-10 col-xs-offset-1 beer-info-box">
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2">
+                        <h3>Details</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="spacer"></div>
+                </div>
+                <div class="row beer-info-row">
+                    <div class="col-xs-12">
+                        <span class="beer-info">Location:&nbsp;</span><span class="beer-info-value">Hammond, LA</span>
+                    </div>
+                </div>
+                <div class="row beer-info-row">
+                    <div class="col-xs-12">
+                        <span class="beer-info">Type:&nbsp;</span><span class="beer-info-value">California Common</span>
+                    </div>
+                </div>
+                <div class="row beer-info-row">
+                    <div class="col-xs-12">
+                        <span class="beer-info">ABV:&nbsp;</span><span class="beer-info-value">5.5%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CompanyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StockCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StockCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ItemPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ItemPrice)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Tags)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Tags)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PalletDescriptors)
-        </dt>
-        @foreach (var asdf in Model.PalletDescriptors)
-        {
             <dd>
-                @Html.DisplayFor(x => asdf.PalletDescriptorName)
+                @Html.DisplayFor(model => model.ItemName)
             </dd>
-        }
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CategoryName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CompanyName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Location)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ImagePath)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StockCount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StockCount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ItemPrice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ItemPrice)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Tags)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Tags)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PalletDescriptors)
+            </dt>
+            @foreach (var asdf in Model.PalletDescriptors)
+            {
+                <dd>
+                    @Html.DisplayFor(x => asdf.PalletDescriptorName)
+                </dd>
+            }
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

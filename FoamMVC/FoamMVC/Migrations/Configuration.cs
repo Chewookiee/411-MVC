@@ -25,6 +25,8 @@ namespace FoamMVC.Migrations
                 new Location() { PrimaryLocation = "LA", SecondaryLocation = "Madisonville", IsDeleted = false,
                 DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null},
                 new Location() { PrimaryLocation = "Ireland", SecondaryLocation = null, IsDeleted = false,
+                DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null},
+                new Location() { PrimaryLocation = "TX", SecondaryLocation = "Shiner", IsDeleted = false,
                 DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null}
             };
             locations.ForEach(s => context.Locations.AddOrUpdate(l => l.PrimaryLocation, s));
@@ -36,17 +38,21 @@ namespace FoamMVC.Migrations
 
             var companies = new List<Company>
             {
-                new Company() { Name = "Boston Beer", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
+                new Company() { Name = "Samuel Adams", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
                     DateUpdated = null,
                     LocationID = locations.Single( s => s.PrimaryLocation.Equals("MA")).ID,
                     Items = new List<Item>() },
-                new Company() { Name = "Champagne Beverage", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
+                new Company() { Name = "Gnarly Barley", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
                     DateUpdated = null,
                     LocationID = locations.Single( s => s.PrimaryLocation.Equals("LA")).ID,
                     Items = new List<Item>() },
-                new Company() { Name = "Guinness", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
+                new Company() { Name = "Guinness Brewery", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
                     DateUpdated = null,
                     LocationID = locations.Single( s => s.PrimaryLocation.Equals("Ireland")).ID,
+                    Items = new List<Item>() },
+                new Company() { Name = "Spoetzl Brewery", IsDeleted = false, DateAdded = DateTime.Now, DateDeleted = null,
+                    DateUpdated = null,
+                    LocationID = locations.Single( s => s.PrimaryLocation.Equals("TX")).ID,
                     Items = new List<Item>() }
             };
             companies.ForEach(s => context.Companies.AddOrUpdate(c => c.Name, s));
@@ -175,34 +181,34 @@ namespace FoamMVC.Migrations
             var items = new List<Item>
             {
                 new Item { Name = "Boston Lager", UPC = "0000000", IsFeatured = true,
-                    ImagePath = "root", StockCount = 50, ItemPrice = 2.99, IsDeleted = false,
+                    ImagePath = null, StockCount = 50, ItemPrice = 2.99, IsDeleted = false,
                     DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null,
                     PalletGroupID = palletGroups.Single(p => p.Name.Equals("Lager")).ID,
-                    CompanyID = companies.Single(c => c.Name.Equals("Boston Beer")).ID,
+                    CompanyID = companies.Single(c => c.Name.Equals("Samuel Adams")).ID,
                     CategoryID = categories.Single(c => c.Name.Equals("Beer")).ID,
                     Tags = new List<Tag>(), },
 
-                new Item { Name = "Budweiser Beer", UPC = "1111111", IsFeatured = true,
-                    ImagePath = "root", StockCount = 25, ItemPrice = 1.99, IsDeleted = false,
+                new Item { Name = "Shiner Bock", UPC = "1111111", IsFeatured = true,
+                    ImagePath = null, StockCount = 25, ItemPrice = 1.99, IsDeleted = false,
                     DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null,
                     PalletGroupID = palletGroups.Single(p => p.Name.Equals("Lager")).ID,
-                    CompanyID = companies.Single(c => c.Name.Equals("Champagne Beverage")).ID,
+                    CompanyID = companies.Single(c => c.Name.Equals("Spoetzl Brewery")).ID,
                     CategoryID = categories.Single(c => c.Name.Equals("Beer")).ID,
                     Tags = new List<Tag>(), },
 
-                new Item { Name = "Samuel Adams Rebel IPA", UPC = "2222222", IsFeatured = true,
-                    ImagePath = "root", StockCount = 34, ItemPrice = 4.49, IsDeleted = false,
+                new Item { Name = "Rebel IPA", UPC = "2222222", IsFeatured = true,
+                    ImagePath = null, StockCount = 34, ItemPrice = 4.49, IsDeleted = false,
                     DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null,
                     PalletGroupID = palletGroups.Single(p => p.Name.Equals("IPA")).ID,
-                    CompanyID = companies.Single(c => c.Name.Equals("Boston Beer")).ID,
+                    CompanyID = companies.Single(c => c.Name.Equals("Samuel Adams")).ID,
                     CategoryID = categories.Single(c => c.Name.Equals("Beer")).ID,
                     Tags = new List<Tag>(), },
 
                 new Item { Name = "Guinness Extra Stout", UPC = "3333333", IsFeatured = true,
-                    ImagePath = "root", StockCount = 34, ItemPrice = 4.49, IsDeleted = false,
+                    ImagePath = null, StockCount = 34, ItemPrice = 4.49, IsDeleted = false,
                     DateAdded = DateTime.Now, DateDeleted = null, DateUpdated = null,
                     PalletGroupID = palletGroups.Single(p => p.Name.Equals("Stout")).ID,
-                    CompanyID = companies.Single(c => c.Name.Equals("Guinness")).ID,
+                    CompanyID = companies.Single(c => c.Name.Equals("Guinness Brewery")).ID,
                     CategoryID = categories.Single(c => c.Name.Equals("Beer")).ID,
                     Tags = new List<Tag>(), }
             };
