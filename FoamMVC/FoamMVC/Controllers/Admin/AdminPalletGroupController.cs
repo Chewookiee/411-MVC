@@ -137,6 +137,7 @@ namespace FoamMVC.Controllers.Admin
                     Name = p.Name
                 }).ToList();
                 model.PalletDescriptors = new MultiSelectList(palletDescriptors, "ID", "Name");
+                model.Name = palletGroup.Name;
 
                 List<int> palletDescriptorIdsAsList = new List<int>();
                 PalletGroup palletGroupToGetPalletDescriptorsFrom = db.PalletGroups.Single(p => p.ID == (int)id);
