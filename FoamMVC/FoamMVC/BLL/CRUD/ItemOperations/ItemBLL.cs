@@ -1,9 +1,11 @@
-﻿using FoamMVC.DAL.CRUD.ItemOperations;
+﻿using System;
+using FoamMVC.DAL.CRUD.ItemOperations;
 using FoamMVC.Models;
 using FoamMVC.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using FoamMVC.DTOs;
 
 namespace FoamMVC.BLL.CRUD.ItemOperations
 {
@@ -15,7 +17,7 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
             _itemDal = new ItemDAL();
         }
         #region Gets
-        public IList<ItemViewModel> GetItemsNameAndID()
+        public List<ItemViewModel> GetItemsNameAndID()
         {
             var itemsToReturn = _itemDal.Get().Select(x => new ItemViewModel
             {
@@ -26,7 +28,20 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
             return itemsToReturn.ToList();
         }
 
-        public IList<ItemDisplayViewModel> GetAllItemsForClient()
+        public ItemViewModel GetItemByUPC(string UPC)
+        {
+            try
+            {
+                return ConvertEntityToViewModel(_itemDal.Get(UPC));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
+        public List<ItemDisplayViewModel> GetAllItemsForClient()
         {
             var itemsToReturn = _itemDal.Get().Select(x => new ItemDisplayViewModel
             {
@@ -42,7 +57,7 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
         public ItemDisplaySingleViewModel GetSingleItemForDisplayByID(int id)
         {
             return ConvertEntityToDisplaySingleViewModel(_itemDal.Get(id));
-            
+
         }
         #endregion
 
@@ -52,10 +67,20 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
             return _itemDal.Create(ConvertViewModelToEntity(viewModel));
         }
 
+        public int UpdateFromStagedItem(StagedItemDTO staged)
+        {
+            var matchingEntity = _itemDal.Get(staged.UPC);
+
+            matchingEntity.StockCount = staged.StockCount;
+            matchingEntity.ItemPrice = staged.ItemPrice;
+
+            return _itemDal.Update(matchingEntity);
+
+        }
         public int UpdateItem(ItemViewModel viewModel)
         {
             return _itemDal.Update(ConvertViewModelToEntity(viewModel));
-        } 
+        }
         #endregion
         #region Delete/Destroy
         public void DeleteItem(ItemViewModel viewModel)
@@ -79,7 +104,7 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
             var items = viewModels.Select(ConvertViewModelToEntity).ToList();
             _itemDal.Destroy(items);
 
-        } 
+        }
         #endregion
 
         #region Utils
@@ -97,7 +122,25 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
                 ImagePath = viewModel.ImagePath,
                 Reviews = viewModel.Reviews,
                 Tags = viewModel.Tags,
-                Likes = viewModel.Likes
+                Likes = viewModel.Likes,
+                StockCount = viewModel.StockCount,
+                ItemPrice = viewModel.ItemPrice
+            };
+        }
+        private ItemViewModel ConvertEntityToViewModel(Item entity)
+        {
+            return new ItemViewModel
+            {
+                PalletGroupID = entity.PalletGroupID,
+                CompanyID = entity.CompanyID,
+                CategoryID = entity.CategoryID,
+                Name = entity.Name,
+                UPC = entity.UPC,
+                ImagePath = entity.ImagePath,
+                Reviews = entity.Reviews,
+                Tags = entity.Tags,
+                Likes = entity.Likes
+
             };
         }
 
@@ -131,7 +174,7 @@ namespace FoamMVC.BLL.CRUD.ItemOperations
                 secondaryLocation = secondaryLocation + ", ";
             }
             return secondaryLocation;
-        } 
+        }
         #endregion
     }
 }

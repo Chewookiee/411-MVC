@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Admin\AdminLocationsController.cs" />
+    <Compile Include="Controllers\Admin\StagedItemController.cs" />
     <Compile Include="Controllers\Admin\TestsController.cs" />
     <Compile Include="Controllers\Client\ItemController.cs" />
     <Compile Include="Controllers\Admin\AdminPalletDescriptorsController.cs" />
@@ -424,6 +425,8 @@
     <Content Include="Views\AdminPalletDescriptors\Edit.cshtml" />
     <Content Include="Views\AdminPalletDescriptors\Create.cshtml" />
     <Content Include="Views\AdminPalletDescriptors\Delete.cshtml" />
+    <Content Include="Views\StagedItem\Index.cshtml" />
+    <Content Include="Views\StagedItem\CompleteStaged.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

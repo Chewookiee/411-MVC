@@ -22,7 +22,7 @@ namespace FoamMVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-           //CloverClient.Run();
+           CloverClient.Run();
         }
     }
 }

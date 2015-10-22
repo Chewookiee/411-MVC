@@ -17,19 +17,6 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
         public ItemDAL(ApplicationDbContext context) : base(context)
         {
         }
-        public int Update(StagedItem stagedItem)
-        {
-            var itemToUpdate = Get(stagedItem.UPC);
-
-            itemToUpdate.StockCount = stagedItem.StockCount;
-            itemToUpdate.ItemPrice = stagedItem.ItemPrice;
-
-            db.Items.AddOrUpdate(itemToUpdate);
-            db.SaveChanges();
-
-            return itemToUpdate.ID;
-
-        }
 
         public int Create(Item itemToCreate)
         {

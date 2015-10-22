@@ -14,7 +14,6 @@ namespace FoamMVC.DAL.CRUD.ItemOperations
         Item Get(Item itemToGet);
         Item Get(string upc);
         int Update(Item updatedItem);
-        int Update(StagedItem stagedItem);
         void Delete(List<Item> itemsToDelete);
         void Delete(List<int> itemsToDelete);
         void Delete(Item itemToDelete);

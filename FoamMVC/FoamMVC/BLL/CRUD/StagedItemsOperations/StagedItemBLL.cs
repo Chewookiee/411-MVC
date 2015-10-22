@@ -2,23 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using FoamMVC.BLL.CRUD.ItemOperations;
 using FoamMVC.DAL.CRUD.ItemOperations;
 using FoamMVC.DAL.CRUD.StagedItemOperations;
 using FoamMVC.DTOs;
 using FoamMVC.Models;
+using FoamMVC.ViewModels;
 
 namespace FoamMVC.BLL.CRUD.StagedItemsOperations
 {
     public class StagedItemBLL
     {
-        private StagedItemDAL _stagedItemDal;
-        private ItemDAL _itemDal;
+        private IStagedItemDAL _stagedItemDal;
+        private ItemBLL _itemBll;
 
         public StagedItemBLL()
         {
             _stagedItemDal = new StagedItemDAL();
-            _itemDal = new ItemDAL();
+            _itemBll = new ItemBLL();
         }
+
+        public void DeleteStagedItem(string UPC)
+        {
+            _stagedItemDal.Destroy(ConvertDTOToEntity(GetStagedItemByUPC(UPC)));
+        } 
+
+        public List<StagedItemDTO> Get()
+        {
+            return _stagedItemDal.Get().Select(x => new StagedItemDTO
+            {
+                Name = x.Name,
+                UPC = x.UPC,
+                ItemPrice = x.ItemPrice,
+                StockCount = x.StockCount
+            }).ToList();
+        } 
 
         public void ProcessStagedItems(List<StagedItemDTO> stagedItems)
         {
@@ -26,11 +44,11 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
             {
                 if (ItemAlreadyExits(item))
                 {
-                    _itemDal.Update(DTOtoEntityMapper(item));
+                    _itemBll.UpdateFromStagedItem(item);
                 }
                 else if (StagedItemAlreadyExists(item))
                 {
-                    _stagedItemDal.Update(DTOtoEntityMapper(item));
+                    UpdateStagedItems(item);
                 }
                 else
                 {
@@ -39,9 +57,41 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
             }
         }
 
+        public StagedItemDTO GetStagedItemByUPC(string UPC)
+        {
+            try
+            {
+                return ConvertEntityToDTO(_stagedItemDal.Get(UPC));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public ItemViewModel GetItemWithStagedItemReflectedOnItByUPC(string UPC)
+        {
+            var staged = GetStagedItemByUPC(UPC);
+            return new ItemViewModel
+            {
+                Name = staged.Name,
+                UPC = staged.UPC,
+                StockCount = staged.StockCount,
+                ItemPrice = staged.ItemPrice
+            };
+        }
+        
         private bool StagedItemAlreadyExists(StagedItemDTO item)
         {
-            return _stagedItemDal.Get().Any(x => x.UPC == item.UPC);
+            try
+            {
+                return (_stagedItemDal.Get(item.UPC) != null);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
         private void UpdateStagedItems(StagedItemDTO item)
@@ -51,7 +101,7 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
 
         private bool ItemAlreadyExits(StagedItemDTO item)
         {
-            return _itemDal.Get().Any(x => x.UPC == item.UPC);
+            return (_itemBll.GetItemByUPC(item.UPC) != null);
         }
 
         private void CreateStagedItems(StagedItemDTO stagedItemDTO)
@@ -73,6 +123,29 @@ namespace FoamMVC.BLL.CRUD.StagedItemsOperations
         private string CleanName(string name)
         {
             return name.Split('/')[0];
+        }
+
+        private StagedItemDTO ConvertEntityToDTO(StagedItem entity)
+        {
+            return new StagedItemDTO
+            {
+                ItemPrice = entity.ItemPrice,
+                Name = entity.Name,
+                StockCount = entity.StockCount,
+                UPC = entity.UPC
+            };
+        }
+
+        private StagedItem ConvertDTOToEntity(StagedItemDTO dto)
+        {
+            return new StagedItem
+            {
+                ID = dto.ID,
+                ItemPrice = dto.ItemPrice,
+                Name = dto.Name,
+                StockCount = dto.StockCount,
+                UPC = dto.UPC
+            };
         }
     }
 }

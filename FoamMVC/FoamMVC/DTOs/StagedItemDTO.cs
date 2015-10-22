@@ -7,6 +7,7 @@ namespace FoamMVC.DTOs
 {
     public class StagedItemDTO
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public string UPC { get; set; }
         public int StockCount { get; set; }
