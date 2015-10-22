@@ -10,16 +10,12 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
     public interface IPalletDescriptorCRUD
     {
         int Create(PalletDescriptor palletDescriptorToCreate);
-        IList<PalletDescriptor> Get();
+        List<PalletDescriptor> Get();
         PalletDescriptor Get(int id);
         int Update(PalletDescriptor updatedPalletDescriptor);
-        void Delete(IList<PalletDescriptor> palletDescriptorsToDelete);
-        void Delete(IList<int> palletDescriptorsToDelete);
+        void Delete(List<PalletDescriptor> palletDescriptorsToDelete);
         void Delete(PalletDescriptor palletDescriptorToDelete);
-        void Delete(int id);
-        void Destroy(IList<PalletDescriptor> palletDescriptorsToDestroy);
-        void Destroy(IList<int> palletDescriptorsToDestroy);
+        void Destroy(List<PalletDescriptor> palletDescriptorsToDestroy);
         void Destroy(PalletDescriptor palletDescriptorToDestroy);
-        void Destroy(int id);
     }
 }

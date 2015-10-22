@@ -175,11 +175,13 @@
     <Compile Include="BLL\CRUD\CompanyOperations\CompanyCRUDBLL.cs" />
     <Compile Include="BLL\CRUD\ItemOperations\ItemCRUDBLL.cs" />
     <Compile Include="BLL\CRUD\LocationOperations\LocationCRUDBLL.cs" />
+    <Compile Include="BLL\CRUD\PalletDescriptorOperation\PalletDescriptorBLL.cs" />
     <Compile Include="BLL\CRUD\PalletGroupOperations\PalletGroupCRUDBLL.cs" />
     <Compile Include="BLL\CRUD\StagedItemsOperations\StagedItemCRUDBLL.cs" />
     <Compile Include="CloverReader\CloverClient.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Admin\AdminPalletDescriptorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -319,10 +321,11 @@
     <Content Include="Views\Admin\CreateCategory.cshtml" />
     <Content Include="Views\Admin\DisplayCategory.cshtml" />
     <Content Include="Views\Admin\CreateCompany.cshtml" />
+    <Content Include="Views\AdminPalletDescriptors\Index.cshtml" />
+    <Content Include="Views\AdminPalletDescriptors\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

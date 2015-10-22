@@ -35,17 +35,12 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
             return idOfPalletDescriptor;
         }
 
-        public void Delete(IList<int> palletDescriptorsToDelete)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(PalletDescriptor palletDescriptorToDelete)
         {
             Delete(palletDescriptorToDelete.ID);
         }
 
-        public void Delete(int id)
+        private void Delete(int id)
         {
             PalletDescriptor palletDescriptorToDelete = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
 
@@ -60,7 +55,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
             db.SaveChanges();
         }
 
-        public void Delete(IList<PalletDescriptor> palletDescriptorsToDelete)
+        public void Delete(List<PalletDescriptor> palletDescriptorsToDelete)
         {
             if (palletDescriptorsToDelete == null)
             {
@@ -72,7 +67,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
             }
         }
 
-        public void Destroy(int id)
+        private void Destroy(int id)
         {
             PalletDescriptor palletDescriptorToDestroy = db.PalletDescriptors.SingleOrDefault(i => i.ID == id);
 
@@ -90,7 +85,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
             Destroy(palletDescriptorToDestroy.ID);
         }
 
-        public void Destroy(IList<int> palletDescriptorsToDestroy)
+        private void Destroy(List<int> palletDescriptorsToDestroy)
         {
             if (palletDescriptorsToDestroy == null)
             {
@@ -102,7 +97,7 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
             }
         }
 
-        public void Destroy(IList<PalletDescriptor> palletDescriptorsToDestroy)
+        public void Destroy(List<PalletDescriptor> palletDescriptorsToDestroy)
         {
             if (palletDescriptorsToDestroy == null)
             {
@@ -114,9 +109,9 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
             }
         }
 
-        public IList<PalletDescriptor> Get()
+        public List<PalletDescriptor> Get()
         {
-            IList<PalletDescriptor> palletDescriptorsToReturn = db.PalletDescriptors.ToList();
+            List<PalletDescriptor> palletDescriptorsToReturn = db.PalletDescriptors.ToList();
 
             if (palletDescriptorsToReturn == null)
             {
@@ -140,18 +135,20 @@ namespace FoamMVC.DAL.CRUD.PalletDescriptorOperations
 
         public int Update(PalletDescriptor updatedPalletDescriptor)
         {
-            PalletDescriptor palletDescriptorToUpdate = db.PalletDescriptors.SingleOrDefault(i => i.ID == updatedPalletDescriptor.ID);
-
+            var palletDescriptorToUpdate = Get(updatedPalletDescriptor.ID);
+            palletDescriptorToUpdate?.Categories.Clear();
             if (palletDescriptorToUpdate == null)
             {
                 throw new Exception("No Location exists with the id " + updatedPalletDescriptor.ID);
             }
 
-            base.UpdateDateUpdated(updatedPalletDescriptor);
+            palletDescriptorToUpdate.Name = updatedPalletDescriptor.Name;
 
-            db.PalletDescriptors.AddOrUpdate(p => p.ID, updatedPalletDescriptor);
+            base.UpdateDateUpdated(palletDescriptorToUpdate);
+
+            db.PalletDescriptors.AddOrUpdate(p => p.ID, palletDescriptorToUpdate);
             db.SaveChanges();
-            int idOfLocation = updatedPalletDescriptor.ID;
+            int idOfLocation = palletDescriptorToUpdate.ID;
 
             return idOfLocation;
         }

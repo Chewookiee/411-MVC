@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using FoamMVC.DAL.CRUD.CategoryOperations;
 using FoamMVC.Models;
 using FoamMVC.ViewModels;
@@ -18,7 +19,6 @@ namespace FoamMVC.BLL.CRUD.CategoryOperations
         }
 
         #region Gets
-
         public IList<CategoryViewModel> GetCategoryNameAndID()
         {
             var viewModel = _categoryCrud.Get().Select(x => new CategoryViewModel
@@ -30,11 +30,31 @@ namespace FoamMVC.BLL.CRUD.CategoryOperations
             return viewModel.ToList();
         }
 
+        public List<SelectListItem> GetCategoryForDropDownList()
+        {
+            return _categoryCrud.Get().Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.ID.ToString()
+            }).ToList();
+        } 
+
+
         public CategoryDisplayViewModel GetSingleCategoryByIDForDisplay(int id)
         {
             Category DALCategory = _categoryCrud.Get(id);
             return ConvertCategoryToCategoryDisplayViewModel(DALCategory);
         }
+
+        public List<SelectListItem> GetDropDownDisplayForCategory()
+        {
+           return _categoryCrud.Get().Select(x => new SelectListItem
+            {
+                Value = x.ID.ToString(),
+                Text = x.Name
+            }).ToList();
+        }
+
         #endregion
 
         #region Create/Update
