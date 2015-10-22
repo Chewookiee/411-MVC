@@ -33,6 +33,10 @@
     width:100%;
 }
 
+.btn:focus {
+    color:#FFFFFF;
+}
+
 .btn-red {
     background-color:#7F2724;
     color:#FFFFFF;
@@ -222,7 +226,13 @@
         margin-top:10px;
     }
 }
-
+/*Beer Pallet Information*/
+.progress {
+    background-color:#EDECDA;
+}
+.progress-bar {
+    background-color:#7F2724;
+}
 /* Beer Rating */
 .beer-rating-box {
     background-color: #072845;
@@ -332,6 +342,13 @@
     border-bottom:none;
 }
 
+.close {
+    color:#FFFFFF;
+    text-shadow:0 1px 0 #000;
+}
+.close:hover {
+    color:#888888;
+}
 
 /*-------------------------------*/
 /*            Overlay            */
@@ -394,6 +411,14 @@ html { height: 100%;}
 .nav-header {
     padding: 0px 0px 0px 5px;
     font-size:30px;
+}
+
+.nav-header > a {
+    display:inline !important;
+    padding:0px 0px 0px 0px !important;
+}
+.nav-header > a:hover {
+    color:#072845 !important;
 }
 
 #foam-icon {
