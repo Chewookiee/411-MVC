@@ -11,16 +11,16 @@ namespace FoamMVC.Controllers.Admin
 {
     public class AdminLocationsController : Controller
     {
-        private LocationCRUDBLL _locationCRUDBLL;
+        private LocationBLL _locationBll;
 
         public AdminLocationsController()
         {
-            _locationCRUDBLL = new LocationCRUDBLL();
+            _locationBll = new LocationBLL();
         }
         
         public ActionResult Index()
         {
-            return View(_locationCRUDBLL.GetAllLocationsForDisplay());
+            return View(_locationBll.GetAllLocationsForDisplay());
         }
 
         public ActionResult Details(int? id)
@@ -30,7 +30,7 @@ namespace FoamMVC.Controllers.Admin
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            LocationDisplayViewModel loaction = _locationCRUDBLL.GetSingleLocationForDisplayByID((int)id);
+            LocationDisplayViewModel loaction = _locationBll.GetSingleLocationForDisplayByID((int)id);
 
             if (loaction == null)
             {
@@ -50,7 +50,7 @@ namespace FoamMVC.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                _locationCRUDBLL.CreateLocation(model);
+                _locationBll.CreateLocation(model);
                 return RedirectToAction("Index");
             }
             
@@ -65,7 +65,7 @@ namespace FoamMVC.Controllers.Admin
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            LocationUpdateViewModel location = _locationCRUDBLL.GetSingleLocationForUpdateByID((int)id);
+            LocationUpdateViewModel location = _locationBll.GetSingleLocationForUpdateByID((int)id);
 
             if (location == null)
             {
@@ -80,7 +80,7 @@ namespace FoamMVC.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                _locationCRUDBLL.UpdateLocation(model);
+                _locationBll.UpdateLocation(model);
                 return RedirectToAction("Index");
             }
 
@@ -95,7 +95,7 @@ namespace FoamMVC.Controllers.Admin
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            LocationDeleteViewModel location = _locationCRUDBLL.GetSingleLocationForDeleteByID((int)id);
+            LocationDeleteViewModel location = _locationBll.GetSingleLocationForDeleteByID((int)id);
 
             if (location == null)
             {
@@ -108,7 +108,7 @@ namespace FoamMVC.Controllers.Admin
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            _locationCRUDBLL.DeleteLocation(_locationCRUDBLL.GetSingleLocationForDeleteByID((int)id));
+            _locationBll.DeleteLocation(_locationBll.GetSingleLocationForDeleteByID((int)id));
 
             return RedirectToAction("Index");
         }

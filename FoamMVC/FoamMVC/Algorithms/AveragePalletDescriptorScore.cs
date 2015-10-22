@@ -9,7 +9,7 @@ namespace FoamMVC.Algorithms
 {
     public class AveragePalletDescriptorScore
     {
-        private readonly ReviewCRUD _reviewCRUD = new ReviewCRUD();
+        private readonly ReviewDAL _reviewDal = new ReviewDAL();
 
         
     }

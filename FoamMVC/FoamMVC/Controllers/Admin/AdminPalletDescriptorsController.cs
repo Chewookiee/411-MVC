@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using FoamMVC.BLL.CRUD.PalletDescriptorOperation;
 using FoamMVC.ViewModels;
 
@@ -33,6 +29,32 @@ namespace FoamMVC.Controllers.Admin
         {
             _descriptorBLL.Update(viewModel);
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View(new PalletDescriptorViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult Create(PalletDescriptorViewModel viewModel)
+        {
+            _descriptorBLL.CreatePalletDescriptor(viewModel);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            return View(_descriptorBLL.Get(id));
+        }
+
+        [HttpPost]
+        public ActionResult Delete(PalletDescriptorViewModel viewModel)
+        {
+            _descriptorBLL.Delete(viewModel);
             return RedirectToAction("Index");
         }
     }

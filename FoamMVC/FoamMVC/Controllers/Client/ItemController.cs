@@ -10,7 +10,7 @@ namespace FoamMVC.Controllers.Client
 {
     public class ItemController : Controller
     {
-        private readonly ItemCRUDBLL _itemCRUD = new ItemCRUDBLL();
+        private readonly ItemBLL _itemCRUD = new ItemBLL();
         // GET: Item
         public ActionResult List()
         {

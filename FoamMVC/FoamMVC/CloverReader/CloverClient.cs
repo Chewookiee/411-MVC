@@ -17,7 +17,7 @@ namespace FoamMVC.CloverReader
             int limit = 100;
             RestClient client = new RestClient("https://api.clover.com/v3/merchants/R0YXW6ESBYFNJ/");
             RootObject rootObject = new RootObject();
-            StagedItemCRUDBLL _stagedITemCRUD = new StagedItemCRUDBLL();
+            StagedItemBLL _stagedITemCRUD = new StagedItemBLL();
             do
             {
                 // Get all items in the "Package Beer" category - currently 1,156
