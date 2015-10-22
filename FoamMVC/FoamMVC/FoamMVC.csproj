@@ -212,7 +212,7 @@
     <Compile Include="DAL\CRUD\TagOperations\ITagDAL.cs" />
     <Compile Include="DAL\CRUD\TagOperations\TagDAL.cs" />
     <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\IUserScoreForDescriptorDAL.cs" />
-    <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\UserScoreForDescriptorDal.cs" />
+    <Compile Include="DAL\CRUD\UserScoreForDescriptorOperations\UserScoreForDescriptorDAL.cs" />
     <Compile Include="DTOs\StagedItemDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
