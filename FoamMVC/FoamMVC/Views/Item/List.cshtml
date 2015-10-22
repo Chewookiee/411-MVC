@@ -18,19 +18,16 @@
 <section class="main-section">
     <div class="container theme-showcase main-container" role="main">
      
-            @{ int count = 0;}
-            @foreach (var item in Model)
-            {
-                if (count == 0)
-                {
-                    @Html.Raw("<div class='row'>")
-                }
-                <div class="col-sm-3 col-xs-6 beer-list-parent-box">
+        @{ int count = 0;}
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3 col-xs-6 beer-list-parent-box">
+                    
                     <div class="beer-list-border">
                         <a href="@Url.Action("Details", new {id = item.ID})">
                             @if (item.ImagePath == null)
                             {
-                                <img src="~/Images/NoBeerPicture.png" alt="Unknown Image" style="max-width: 100%;" />
+                                <img src="~/Images/NoBeerPicture.png" alt="Unknown Image" style="max-width: 100%;"/>
                             }
                             else
                             {
@@ -48,19 +45,9 @@
                             <div class="row row-no-margin">
                                 <strong>Price: </strong><span>@Html.DisplayFor(modelItem => item.ItemPrice)</span>
                             </div>
-
                         </div>
                     </div>
-                </div>
-                    if (count == 3)
-                    {
-                        @Html.Raw("</div>")        
-                    }   
-                count++;
-                if (count == 4)
-                {
-                    count = 0;
-                }
-            }
+            </div>
+        }
     </div>
 </section>
