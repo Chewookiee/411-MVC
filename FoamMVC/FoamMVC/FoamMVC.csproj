@@ -323,6 +323,8 @@
     <Content Include="Views\Admin\CreateCompany.cshtml" />
     <Content Include="Views\AdminPalletDescriptors\Index.cshtml" />
     <Content Include="Views\AdminPalletDescriptors\Edit.cshtml" />
+    <Content Include="Views\AdminPalletDescriptors\Create.cshtml" />
+    <Content Include="Views\AdminPalletDescriptors\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
