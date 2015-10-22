@@ -122,11 +122,7 @@ namespace FoamMVC.DAL.CRUD.UserScoreForDescriptorOperations
 
         public List<UserScoreForDescriptor> Get()
         {
-<<<<<<< HEAD:FoamMVC/FoamMVC/DAL/CRUD/UserScoreForDescriptorOperations/UserScoreForDescriptorCRUD.cs
-            IList<UserScoreForDescriptor> userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.Where(u => u.IsDeleted == false).ToList();
-=======
-            List<UserScoreForDescriptor> userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.ToList();
->>>>>>> 915ff1224ce01fdde97b367b7d18b87f664de4c6:FoamMVC/FoamMVC/DAL/CRUD/UserScoreForDescriptorOperations/UserScoreForDescriptorDal.cs
+            List<UserScoreForDescriptor> userScoreForDescriptorsToReturn = db.UserScoreForDescriptors.Where(u => u.IsDeleted == false).ToList();
 
             if (userScoreForDescriptorsToReturn == null)
             {

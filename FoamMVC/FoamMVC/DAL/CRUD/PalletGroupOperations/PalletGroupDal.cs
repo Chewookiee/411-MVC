@@ -37,11 +37,7 @@ namespace FoamMVC.DAL.CRUD.PalletGroupOperations
 
         public List<PalletGroup> Get()
         {
-<<<<<<< HEAD:FoamMVC/FoamMVC/DAL/CRUD/PalletGroupOperations/PalletGroupCRUD.cs
-            IList<PalletGroup> palletGroupsToReturn = db.PalletGroups.Where(p => p.IsDeleted == false).ToList();
-=======
-            List<PalletGroup> palletGroupsToReturn = db.PalletGroups.ToList();
->>>>>>> 915ff1224ce01fdde97b367b7d18b87f664de4c6:FoamMVC/FoamMVC/DAL/CRUD/PalletGroupOperations/PalletGroupDal.cs
+            List<PalletGroup> palletGroupsToReturn = db.PalletGroups.Where(p => p.IsDeleted == false).ToList();
 
             if (palletGroupsToReturn == null)
             {

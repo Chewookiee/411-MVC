@@ -38,11 +38,7 @@ namespace FoamMVC.DAL.CRUD.TagOperations
 
         public List<Tag> Get()
         {
-<<<<<<< HEAD:FoamMVC/FoamMVC/DAL/CRUD/TagOperations/TagCRUD.cs
-            IList<Tag> tagsToReturn = db.Tags.Where(t => t.IsDeleted == false).ToList();
-=======
-            List<Tag> tagsToReturn = db.Tags.ToList();
->>>>>>> 915ff1224ce01fdde97b367b7d18b87f664de4c6:FoamMVC/FoamMVC/DAL/CRUD/TagOperations/TagDal.cs
+            List<Tag> tagsToReturn = db.Tags.Where(t => t.IsDeleted == false).ToList();
 
             if (tagsToReturn == null)
             {

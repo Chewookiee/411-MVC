@@ -38,12 +38,7 @@ namespace FoamMVC.DAL.CRUD.CategoryOperations
 
         public List<Category> Get()
         {
-<<<<<<< HEAD:FoamMVC/FoamMVC/DAL/CRUD/CategoryOperations/CategoryCRUD.cs
-            IList<Category> categoriesToReturn = db.Categories.Where(c => c.IsDeleted == false).ToList();
-=======
-            List<Category> categoriesToReturn = db.Categories.ToList();
->>>>>>> 915ff1224ce01fdde97b367b7d18b87f664de4c6:FoamMVC/FoamMVC/DAL/CRUD/CategoryOperations/CategoryDAL.cs
-
+            List<Category> categoriesToReturn = db.Categories.Where(c => c.IsDeleted == false).ToList();
             if (categoriesToReturn == null)
             {
                 throw new Exception("No Categories exist in the database.");

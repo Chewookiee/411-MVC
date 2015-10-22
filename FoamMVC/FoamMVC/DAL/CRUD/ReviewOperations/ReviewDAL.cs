@@ -99,11 +99,7 @@ namespace FoamMVC.DAL.CRUD.ReviewOperations
 
         public List<Review> Get()
         {
-<<<<<<< HEAD:FoamMVC/FoamMVC/DAL/CRUD/ReviewOperations/ReviewCRUD.cs
-            IList<Review> reviewsToReturn = db.Reviews.Where(r => r.IsDeleted == false).ToList();
-=======
-            List<Review> reviewsToReturn = db.Reviews.ToList();
->>>>>>> 915ff1224ce01fdde97b367b7d18b87f664de4c6:FoamMVC/FoamMVC/DAL/CRUD/ReviewOperations/ReviewDAL.cs
+            List<Review> reviewsToReturn = db.Reviews.Where(r => r.IsDeleted == false).ToList();
 
             if (reviewsToReturn == null)
             {

@@ -122,11 +122,7 @@ namespace FoamMVC.DAL.CRUD.CompanyOperations
 
         public List<Company> Get()
         {
-<<<<<<< HEAD:FoamMVC/FoamMVC/DAL/CRUD/CompanyOperations/CompanyCRUD.cs
-            IList<Company> companiesToReturn = db.Companies.Where(c => c.IsDeleted == false).ToList();
-=======
-            List<Company> companiesToReturn = db.Companies.ToList();
->>>>>>> 915ff1224ce01fdde97b367b7d18b87f664de4c6:FoamMVC/FoamMVC/DAL/CRUD/CompanyOperations/CompanyDAL.cs
+            List<Company> companiesToReturn = db.Companies.Where(c => c.IsDeleted == false).ToList();
 
             if (companiesToReturn == null)
             {

@@ -123,11 +123,7 @@ namespace FoamMVC.DAL.CRUD.LikeOperations
 
         public List<Like> Get()
         {
-<<<<<<< HEAD:FoamMVC/FoamMVC/DAL/CRUD/LikeOperations/LikeCRUD.cs
-            IList<Like> likesToReturn = db.Likes.Where(i => i.IsDeleted == false).ToList();
-=======
-            List<Like> likesToReturn = db.Likes.ToList();
->>>>>>> 915ff1224ce01fdde97b367b7d18b87f664de4c6:FoamMVC/FoamMVC/DAL/CRUD/LikeOperations/LikeDAL.cs
+            List<Like> likesToReturn = db.Likes.Where(i => i.IsDeleted == false).ToList();
 
             if (likesToReturn == null)
             {
