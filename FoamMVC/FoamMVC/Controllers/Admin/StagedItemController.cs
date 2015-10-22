@@ -42,7 +42,8 @@ namespace FoamMVC.Controllers.Admin
                 IsFeautured = viewModel.IsFeautured,
                 ItemPrice = viewModel.ItemPrice.CurrencyAsDouble(),
                 ImagePath = viewModel.ImagePath,
-                Name = viewModel.Name
+                Name = viewModel.Name,
+                StockCount = viewModel.StockCount
             };
             _itemBll.CreateItem(newViewModel);
             _stagedItemBll.DeleteStagedItem(viewModel.UPC);
