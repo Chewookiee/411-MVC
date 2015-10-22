@@ -34,7 +34,7 @@
                             }
                             else
                             {
-                                @Html.DisplayFor(modelItem => item.ImagePath)
+                                <img src="@Html.DisplayFor(modelItem => item.ImagePath)" alt="Foam Beer Image" style="max-width: 100%;"/>
                             }
                         </a>
                         <div class="beer-list-info-box">
@@ -52,12 +52,12 @@
                         </div>
                     </div>
                 </div>
-                    if (count == 4)
+                    if (count == 3)
                     {
                         @Html.Raw("</div>")        
                     }   
                 count++;
-                if (count == 5)
+                if (count == 4)
                 {
                     count = 0;
                 }
